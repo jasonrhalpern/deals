@@ -22,4 +22,8 @@ describe Business do
     expect(build_stubbed(:business, user: nil)).to have(1).errors_on(:user_id)
   end
 
+  it 'is has 3 locations' do
+    expect(create(:business_with_locations).locations.count).to eq(3)
+  end
+
 end
