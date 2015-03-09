@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+  has_many :user_roles
+  has_many :roles, :through => :user_roles
+
   validates :first_name, :last_name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: Devise::email_regexp }
   validates :password, presence: true, confirmation: true, length: { in: 6..20 }, if: :password_required?
@@ -17,4 +20,7 @@ class User < ActiveRecord::Base
     !password.nil? || !password_confirmation.nil?
   end
 
+  def has_role?(role_sym)
+    roles.any? { |r| r.name.underscore.to_sym == role_sym }
+  end
 end
