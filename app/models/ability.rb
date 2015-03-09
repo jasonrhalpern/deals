@@ -9,6 +9,7 @@ class Ability
       can :manage, :all
     else
       can :crud, User, :id => user.id
+      can :crud, Business, :user_id => user.id
     end
   end
 end

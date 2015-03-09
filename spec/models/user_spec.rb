@@ -47,8 +47,7 @@ describe User do
     expect(create(:admin).roles.count).to eq(1)
   end
 
-
-  it 'is associated with a business' do
+  it 'is has a business' do
     expect(create(:user_with_business).business.name).to eq('A Pizza Joint')
   end
 

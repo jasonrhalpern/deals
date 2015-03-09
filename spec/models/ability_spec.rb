@@ -13,6 +13,12 @@ describe "Ability" do
       assert @ability.cannot?(:crud, User.new)
       assert @ability.cannot?(:crud, @user_two)
     end
+
+    it "can crud his own business, but not the businesses of other users" do
+      assert @ability.can?(:crud, Business.new(:user => @user))
+      assert @ability.cannot?(:crud, Business.new)
+      assert @ability.cannot?(:crud, Business.new(:user => @user_two))
+    end
   end
 
   describe "Admin" do
@@ -24,6 +30,11 @@ describe "Ability" do
     it "can crud himself and other users" do
       assert @ability.can?(:crud, @admin)
       assert @ability.can?(:crud, User.new)
+    end
+
+    it "can crud his own business and those of other users" do
+      assert @ability.can?(:crud, Business.new(:user => @admin))
+      assert @ability.can?(:crud, Business.new)
     end
   end
 end

@@ -15,4 +15,8 @@ describe Category do
     expect(build_stubbed(:category, name: 'Restaurants')).to have(1).errors_on(:name)
   end
 
+  it 'is associated with 2 businesses' do
+    expect(create(:category_with_businesses).businesses.count).to eq(2)
+  end
+
 end
