@@ -10,12 +10,16 @@ describe Business do
     expect(build_stubbed(:business, name: nil)).to have(1).errors_on(:name)
   end
 
+  it 'is invalid without a website' do
+    expect(build_stubbed(:business, website: nil)).to have(1).errors_on(:website)
+  end
+
   it 'is invalid without a category' do
-    expect(build_stubbed(:business, category_id: nil)).to have(1).errors_on(:category_id)
+    expect(build_stubbed(:business, category: nil)).to have(1).errors_on(:category_id)
   end
 
   it 'is invalid without a user' do
-    expect(build_stubbed(:business, user_id: nil)).to have(1).errors_on(:user_id)
+    expect(build_stubbed(:business, user: nil)).to have(1).errors_on(:user_id)
   end
 
 end

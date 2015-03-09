@@ -7,11 +7,11 @@ describe UserRole do
   end
 
   it 'is invalid without a user' do
-    expect(build_stubbed(:user_role, user_id: nil)).to have(1).errors_on(:user_id)
+    expect(build_stubbed(:user_role, user: nil)).to have(1).errors_on(:user_id)
   end
 
   it 'is invalid without a role' do
-    expect(build_stubbed(:user_role, role_id: nil)).to have(1).errors_on(:role_id)
+    expect(build_stubbed(:user_role, role: nil)).to have(1).errors_on(:role_id)
   end
 
   it 'is invalid if the user is already associated with this role' do
