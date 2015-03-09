@@ -12,4 +12,14 @@ FactoryGirl.define do
     end
   end
 
+  factory :user_with_business, parent: :user do
+    transient do
+      business_count 1
+    end
+
+    after(:create) do |user, evaluator|
+      create_list(:business, evaluator.business_count, user: user)
+    end
+  end
+
 end
