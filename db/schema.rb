@@ -11,15 +11,37 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309164344) do
+ActiveRecord::Schema.define(version: 20150309182525) do
+
+  create_table "businesses", force: true do |t|
+    t.string   "name"
+    t.text     "website"
+    t.integer  "category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "user_id"
+  end
+
+  add_index "businesses", ["category_id"], name: "index_businesses_on_category_id"
+  add_index "businesses", ["user_id"], name: "index_businesses_on_user_id"
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "roles", force: true do |t|
-    t.string "name"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "user_roles", force: true do |t|
-    t.integer "user_id"
-    t.integer "role_id"
+    t.integer  "user_id"
+    t.integer  "role_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   add_index "user_roles", ["role_id"], name: "index_user_roles_on_role_id"

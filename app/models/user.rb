@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  has_one :business, inverse_of: :user
   has_many :user_roles
   has_many :roles, :through => :user_roles
 
