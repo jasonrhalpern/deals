@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150309204943) do
+ActiveRecord::Schema.define(version: 20150311135704) do
 
   create_table "businesses", force: true do |t|
     t.string   "name"
@@ -31,6 +31,14 @@ ActiveRecord::Schema.define(version: 20150309204943) do
     t.datetime "updated_at"
   end
 
+  create_table "favorites", force: true do |t|
+    t.integer "user_id"
+    t.integer "business_id"
+  end
+
+  add_index "favorites", ["business_id"], name: "index_favorites_on_business_id"
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
+
   create_table "locations", force: true do |t|
     t.string   "street"
     t.string   "city"
@@ -45,6 +53,7 @@ ActiveRecord::Schema.define(version: 20150309204943) do
   end
 
   add_index "locations", ["business_id"], name: "index_locations_on_business_id"
+  add_index "locations", ["latitude", "longitude"], name: "index_locations_on_latitude_and_longitude"
 
   create_table "roles", force: true do |t|
     t.string   "name"

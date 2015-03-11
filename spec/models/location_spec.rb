@@ -37,4 +37,12 @@ describe Location do
   it 'is invalid without a business' do
     expect(build_stubbed(:location, business: nil)).to have(1).errors_on(:business_id)
   end
+
+  it 'has a latitude' do
+    expect(create(:location).latitude).not_to be_nil
+  end
+
+  it 'has a longitude' do
+    expect(create(:location).longitude).not_to be_nil
+  end
 end

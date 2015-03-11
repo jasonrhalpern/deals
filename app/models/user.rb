@@ -2,6 +2,8 @@ class User < ActiveRecord::Base
   has_one :business, inverse_of: :user
   has_many :user_roles
   has_many :roles, :through => :user_roles
+  has_many :favorites
+  has_many :favorite_businesses, :through => :favorites, :source => :business
 
   validates :first_name, :last_name, presence: true
   validates :email, presence: true, uniqueness: true, format: { with: Devise::email_regexp }
