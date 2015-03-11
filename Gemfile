@@ -26,7 +26,7 @@ gem 'cancancan', '~> 1.9'
 
 gem 'cocaine'
 gem 'paperclip'
-gem 'aws-sdk'
+gem 'aws-sdk-v1'
 
 gem 'geocoder'
 
