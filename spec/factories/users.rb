@@ -8,7 +8,7 @@ FactoryGirl.define do
 
   factory :admin, parent: :user do
     after(:create) do |user|
-      user.user_roles << create(:user_role)
+      user.user_roles << create(:admin_user_role)
     end
   end
 
@@ -19,6 +19,16 @@ FactoryGirl.define do
 
     after(:create) do |user, evaluator|
       create_list(:business, evaluator.business_count, user: user)
+    end
+  end
+
+  factory :user_with_favorites, parent: :user do
+    transient do
+      favorites_count 2
+    end
+
+    after(:create) do |user, evaluator|
+      create_list(:favorite, evaluator.favorites_count, user: user)
     end
   end
 

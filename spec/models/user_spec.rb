@@ -48,7 +48,15 @@ describe User do
   end
 
   it 'is has a business' do
-    expect(create(:user_with_business).business.name).to eq('A Pizza Joint')
+    expect(create(:user_with_business).business.name).to start_with('A Pizza Joint')
+  end
+
+  it 'has 2 favorites' do
+    expect(create(:user_with_favorites).favorites.count).to eq(2)
+  end
+
+  it 'has 2 favorite businesses' do
+    expect(create(:user_with_favorites).favorite_businesses.count).to eq(2)
   end
 
 end

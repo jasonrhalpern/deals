@@ -26,4 +26,12 @@ describe Business do
     expect(create(:business_with_locations).locations.count).to eq(3)
   end
 
+  it 'has 3 favorites' do
+    expect(create(:business_with_favorites).favorites.count).to eq(3)
+  end
+
+  it 'has been favorited by 3 users' do
+    expect(create(:business_with_favorites).favorited.count).to eq(3)
+  end
+
 end

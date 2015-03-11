@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :category do
-    name 'Restaurants'
+    sequence(:name) { |n| "Restaurants #{n}" }
   end
 
   factory :category_with_businesses, parent: :category do
