@@ -14,4 +14,14 @@ FactoryGirl.define do
     business
   end
 
+  factory :deal_with_locations, parent: :deal do
+    transient do
+      locations_count 2
+    end
+
+    after(:create) do |deal, evaluator|
+      create_list(:location_deal, evaluator.locations_count, deal: deal)
+    end
+  end
+
 end

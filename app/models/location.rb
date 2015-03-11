@@ -1,5 +1,7 @@
 class Location < ActiveRecord::Base
   geocoded_by :address
+  has_many :location_deals
+  has_many :deals, :through => :location_deals
   belongs_to :business, inverse_of: :locations
 
   validates :street, :city, :state, :zip_code, :phone_number, :business_id, presence: true

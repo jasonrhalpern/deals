@@ -45,4 +45,12 @@ describe Location do
   it 'has a longitude' do
     expect(create(:location).longitude).not_to be_nil
   end
+
+  it 'is associated with 3 locations' do
+    expect(create(:location_with_deals).deals.count).to eq(3)
+  end
+
+  it 'is associated with 3 location deals' do
+    expect(create(:location_with_deals).location_deals.count).to eq(3)
+  end
 end

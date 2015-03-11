@@ -34,4 +34,12 @@ describe Deal do
     expect(build_stubbed(:deal, friday: false, saturday: false)).to have(1).errors_on(:monday)
   end
 
+  it 'is associated with 2 locations' do
+    expect(create(:deal_with_locations).locations.count).to eq(2)
+  end
+
+  it 'is associated with 2 location deals' do
+    expect(create(:deal_with_locations).location_deals.count).to eq(2)
+  end
+
 end
