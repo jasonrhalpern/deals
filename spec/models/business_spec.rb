@@ -34,4 +34,8 @@ describe Business do
     expect(create(:business_with_favorites).favorited.count).to eq(3)
   end
 
+  it 'has 3 deals' do
+    expect(create(:business_with_deals).deals.count).to eq(2)
+  end
+
 end

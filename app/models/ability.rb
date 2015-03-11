@@ -11,6 +11,7 @@ class Ability
       can :crud, User, :id => user.id
       can :crud, Business, :user_id => user.id
       can :crud, Location, :business => { :user_id => user.id }
+      can :crud, Deal, :business => { :user_id => user.id }
     end
   end
 end

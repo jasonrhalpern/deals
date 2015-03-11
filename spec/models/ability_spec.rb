@@ -27,6 +27,12 @@ describe "Ability" do
       assert @ability.cannot?(:crud, Location.new)
       assert @ability.cannot?(:crud, Location.new(:business => @business_two))
     end
+
+    it "can crud a deal of his own business, but not the deals of others" do
+      assert @ability.can?(:crud, Deal.new(:business => @business))
+      assert @ability.cannot?(:crud, Deal.new)
+      assert @ability.cannot?(:crud, Deal.new(:business => @business_two))
+    end
   end
 
   describe "Admin" do
@@ -49,6 +55,12 @@ describe "Ability" do
       assert @ability.can?(:crud, Location.new(:business => @business))
       assert @ability.can?(:crud, Location.new)
       assert @ability.can?(:crud, Location.new(:business => @business_two))
+    end
+
+    it "can crud a deal of his own business and the deals of others" do
+      assert @ability.can?(:crud, Deal.new(:business => @business))
+      assert @ability.can?(:crud, Deal.new)
+      assert @ability.can?(:crud, Deal.new(:business => @business_two))
     end
   end
 end

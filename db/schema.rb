@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311135704) do
+ActiveRecord::Schema.define(version: 20150311175243) do
 
   create_table "businesses", force: true do |t|
     t.string   "name"
@@ -31,6 +31,25 @@ ActiveRecord::Schema.define(version: 20150311135704) do
     t.datetime "updated_at"
   end
 
+  create_table "deals", force: true do |t|
+    t.integer  "status"
+    t.text     "description"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "monday"
+    t.boolean  "tuesday"
+    t.boolean  "wednesday"
+    t.boolean  "thursday"
+    t.boolean  "friday"
+    t.boolean  "saturday"
+    t.boolean  "sunday"
+    t.integer  "business_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "deals", ["business_id"], name: "index_deals_on_business_id"
+
   create_table "favorites", force: true do |t|
     t.integer "user_id"
     t.integer "business_id"
@@ -38,6 +57,14 @@ ActiveRecord::Schema.define(version: 20150311135704) do
 
   add_index "favorites", ["business_id"], name: "index_favorites_on_business_id"
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
+
+  create_table "location_deals", force: true do |t|
+    t.integer "deal_id"
+    t.integer "location_id"
+  end
+
+  add_index "location_deals", ["deal_id"], name: "index_location_deals_on_deal_id"
+  add_index "location_deals", ["location_id"], name: "index_location_deals_on_location_id"
 
   create_table "locations", force: true do |t|
     t.string   "street"
