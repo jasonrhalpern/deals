@@ -6,6 +6,8 @@ describe "Ability" do
       @user = create(:user)
       @user_two = create(:user)
       @ability = Ability.new(@user)
+      @business = create(:business, :user => @user)
+      @business_two = create(:business, :user => @user_two)
     end
 
     it "can crud himself, but not other users" do
@@ -18,6 +20,12 @@ describe "Ability" do
       assert @ability.can?(:crud, Business.new(:user => @user))
       assert @ability.cannot?(:crud, Business.new)
       assert @ability.cannot?(:crud, Business.new(:user => @user_two))
+    end
+
+    it "can crud a location of his own business, but not the locations of others" do
+      assert @ability.can?(:crud, Location.new(:business => @business))
+      assert @ability.cannot?(:crud, Location.new)
+      assert @ability.cannot?(:crud, Location.new(:business => @business_two))
     end
   end
 
@@ -35,6 +43,12 @@ describe "Ability" do
     it "can crud his own business and those of other users" do
       assert @ability.can?(:crud, Business.new(:user => @admin))
       assert @ability.can?(:crud, Business.new)
+    end
+
+    it "can crud a location of his own business and the locations of others" do
+      assert @ability.can?(:crud, Location.new(:business => @business))
+      assert @ability.can?(:crud, Location.new)
+      assert @ability.can?(:crud, Location.new(:business => @business_two))
     end
   end
 end
