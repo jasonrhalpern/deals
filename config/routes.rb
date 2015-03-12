@@ -4,6 +4,8 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :businesses
+  resources :businesses do
+    resources :locations
+  end
 
 end

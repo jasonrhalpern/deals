@@ -10,7 +10,6 @@
 
 <p>
   <strong>Image:</strong>
-  <%= f.label :avatar %>
   <% if @business.avatar.exists? %>
       <%= image_tag @business.avatar.url %><br/>
   <% end %>
@@ -21,4 +20,4 @@
   <%= @business.category.name %>
 </p>
 
-<%= link_to 'Edit', edit_user_location_path(@user) %>
+<%= link_to 'Edit', edit_business_path(@business) %>
