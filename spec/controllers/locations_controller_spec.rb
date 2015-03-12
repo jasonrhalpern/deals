@@ -80,6 +80,38 @@ describe LocationsController do
     end
   end
 
+  describe "PATCH #update" do
+    context "with valid attributes" do
+      it "changes the location" do
+        patch :update, :business_id => johns_location.business_id, :id => johns_location,
+              location: attributes_for(:location, :street => '8 Pond Avenue')
+        johns_location.reload
+        expect(johns_location.street).to eq('8 Pond Avenue')
+      end
+
+      it "redirects to the updated locations" do
+        patch :update, :business_id => johns_location.business_id, :id => johns_location,
+              location: attributes_for(:location, :street => '8 Pond Avenue')
+        expect(response).to redirect_to business_locations_path(johns_location.business)
+      end
+    end
+
+    context "with invalid attributes" do
+      it "does not change the location" do
+        patch :update, :business_id => johns_location.business_id, :id => johns_location,
+              location: attributes_for(:location, :street => '8 Pond Avenue', :city => nil)
+        johns_location.reload
+        expect(johns_location.street).to_not eq('8 Pond Avenue')
+      end
+
+      it "re-renders the edit template" do
+        patch :update, :business_id => johns_location.business_id, :id => johns_location,
+              location: attributes_for(:location, :street => '8 Pond Avenue', :city => nil)
+        expect(response).to render_template("edit")
+      end
+    end
+  end
+
   describe "DELETE #destroy" do
     before(:each) do
       @my_location = create(:location, :business => create(:business, :user => @user))
