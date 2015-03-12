@@ -14,6 +14,10 @@ describe Business do
     expect(build_stubbed(:business, website: nil)).to have(1).errors_on(:website)
   end
 
+  it 'is invalid without an avatar' do
+    expect(build_stubbed(:business, avatar: nil)).to have(1).errors_on(:avatar)
+  end
+
   it 'is invalid without a category' do
     expect(build_stubbed(:business, category: nil)).to have(1).errors_on(:category_id)
   end

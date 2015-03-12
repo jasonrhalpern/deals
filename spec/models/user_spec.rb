@@ -27,6 +27,10 @@ describe User do
     expect(build_stubbed(:user, email: 'test@aol.com')).to have(1).errors_on(:email)
   end
 
+  it 'is invalid without an avatar' do
+    expect(build_stubbed(:user, avatar: nil)).to have(1).errors_on(:avatar)
+  end
+
   it 'is invalid with a password that is too short' do
     expect(build_stubbed(:user, password: 'pw4$')).to have(1).errors_on(:password)
   end

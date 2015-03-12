@@ -3,6 +3,7 @@ FactoryGirl.define do
   factory :business do
     sequence(:name) { |n| "A Pizza Joint#{n}" }
     sequence(:website) { |n| "http://www.apizzajoint#{n}.com" }
+    avatar { fixture_file_upload(Rails.root.join('spec/uploads/test_avatar.png'), 'image/png') }
     category
     user
   end

@@ -4,6 +4,7 @@ FactoryGirl.define do
     last_name 'Jones'
     sequence(:email) { |n| "person#{n}@aol.com" }
     password 'abc123'
+    avatar { fixture_file_upload(Rails.root.join('spec/uploads/test_avatar.png'), 'image/png') }
   end
 
   factory :admin, parent: :user do
