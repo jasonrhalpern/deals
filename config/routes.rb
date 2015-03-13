@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :businesses do
     resources :locations
+    resources :deals
   end
 
 end

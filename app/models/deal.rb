@@ -1,7 +1,7 @@
 class Deal < ActiveRecord::Base
   enum status: [ :active, :disabled ] #DO NOT change this order
 
-  has_many :location_deals
+  has_many :location_deals, dependent: :destroy
   has_many :locations, :through => :location_deals
   belongs_to :business, inverse_of: :deals
 

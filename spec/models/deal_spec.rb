@@ -42,4 +42,12 @@ describe Deal do
     expect(create(:deal_with_locations).location_deals.count).to eq(2)
   end
 
+  it "destroys the associated location deals" do
+    deal = create(:deal)
+    location_deal = create(:location_deal, :deal => deal)
+    expect(LocationDeal.all).to include(location_deal)
+    deal.destroy
+    expect(LocationDeal.all).not_to include(location_deal)
+  end
+
 end

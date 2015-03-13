@@ -53,4 +53,12 @@ describe Location do
   it 'is associated with 3 location deals' do
     expect(create(:location_with_deals).location_deals.count).to eq(3)
   end
+
+  it "destroys the associated location deals" do
+    location = create(:location_with_deals)
+    location_deal = create(:location_deal, :location => location)
+    expect(LocationDeal.all).to include(location_deal)
+    location.destroy
+    expect(LocationDeal.all).not_to include(location_deal)
+  end
 end
