@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150311204323) do
+ActiveRecord::Schema.define(version: 20150315185733) do
 
   create_table "businesses", force: true do |t|
     t.string   "name"
@@ -56,10 +56,10 @@ ActiveRecord::Schema.define(version: 20150311204323) do
 
   create_table "favorites", force: true do |t|
     t.integer "user_id"
-    t.integer "business_id"
+    t.integer "location_id"
   end
 
-  add_index "favorites", ["business_id"], name: "index_favorites_on_business_id"
+  add_index "favorites", ["location_id"], name: "index_favorites_on_location_id"
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
 
   create_table "location_deals", force: true do |t|

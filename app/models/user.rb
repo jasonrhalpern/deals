@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :user_roles
   has_many :roles, :through => :user_roles
   has_many :favorites
-  has_many :favorite_businesses, :through => :favorites, :source => :business
+  has_many :favorite_businesses, :through => :favorites, :source => :location
   has_attached_file :avatar,
                     #:styles => { :medium => "300x300>", :thumb => "100x100>" },
                     :storage => :s3,

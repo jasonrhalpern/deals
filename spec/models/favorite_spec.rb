@@ -10,8 +10,8 @@ describe Favorite do
     expect(build_stubbed(:favorite, user: nil)).to have(1).errors_on(:user_id)
   end
 
-  it 'is invalid without a business' do
-    expect(build_stubbed(:favorite, business: nil)).to have(1).errors_on(:business_id)
+  it 'is invalid without a location' do
+    expect(build_stubbed(:favorite, location: nil)).to have(1).errors_on(:location_id)
   end
 
 end

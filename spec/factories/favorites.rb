@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :favorite do
     user
-    business
+    location
   end
 end

@@ -18,16 +18,6 @@ FactoryGirl.define do
     end
   end
 
-  factory :business_with_favorites, parent: :business do
-    transient do
-      favorites_count 3
-    end
-
-    after(:create) do |business, evaluator|
-      create_list(:favorite, evaluator.favorites_count, business: business)
-    end
-  end
-
   factory :business_with_deals, parent: :business do
     transient do
       deals_count 2
