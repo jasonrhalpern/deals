@@ -1,6 +1,11 @@
 <div><%= link_to 'Home', root_path  %></div>
 <% if user_signed_in? %>
-    <div><%= link_to 'Profile', edit_user_registration_path %></div>
+    <div><%= link_to 'My Account', edit_user_registration_path %></div>
+    <% if current_user.business.nil? || @register_business %>
+        <div><%= link_to 'Register Business', new_business_path %></div>
+    <% else %>
+        <div><%= link_to 'My Business', business_path(current_user.business) %></div>
+    <% end %>
     <div><%= link_to 'Logout', destroy_user_session_path, :method => :delete %></div>
 <% else %>
     <div><%= link_to 'Sign Up', new_user_registration_path  %></div>

@@ -4,11 +4,15 @@ class BusinessesController < ApplicationController
   before_filter :authenticate_user!
 
   def new
-    @business = current_user.build_business
+    if current_user.business.present?
+      redirect_to business_path(current_user.business)
+    else
+      @register_business = true
+      @business = current_user.build_business
+    end
   end
 
   def show
-    redirect_to action: :new if current_user.business.nil?
   end
 
   def create

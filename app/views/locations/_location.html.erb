@@ -1,0 +1,27 @@
+<p>
+  <strong>Street:</strong>
+  <%= location.street %>
+</p>
+
+<p>
+  <strong>City:</strong>
+  <%= location.city %>
+</p>
+
+<p>
+  <strong>State:</strong>
+  <%= location.state %>
+</p>
+
+<p>
+  <strong>Zip Code:</strong>
+  <%= location.zip_code %>
+</p>
+
+<p>
+  <strong>Phone Number:</strong>
+  <%= location.phone_number %>
+</p>
+
+<%= link_to 'Edit', edit_business_location_path(@business, location) %>
+<%= link_to 'Delete', business_location_path(@business, location), method: :delete, data: { confirm: 'Are you sure?' } %>
