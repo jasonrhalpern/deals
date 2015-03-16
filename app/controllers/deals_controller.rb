@@ -39,7 +39,7 @@ class DealsController < ApplicationController
 
   def deal_params
     params.require(:deal).permit(:status, :description, :start_date, :end_date, :monday, :tuesday,
-                                :wednesday, :thursday, :friday, :saturday, :sunday)
+                                :wednesday, :thursday, :friday, :saturday, :sunday, {:location_ids => []})
   end
 
 end

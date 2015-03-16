@@ -31,7 +31,7 @@ describe Deal do
   end
 
   it 'is invalid if a day of the week is not selected' do
-    expect(build_stubbed(:deal, friday: false, saturday: false)).to have(1).errors_on(:monday)
+    expect(build_stubbed(:deal, friday: false, saturday: false)).to have(1).errors_on(:base)
   end
 
   it 'is associated with 2 locations' do

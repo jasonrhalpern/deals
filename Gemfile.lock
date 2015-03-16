@@ -38,6 +38,8 @@ GEM
     bcrypt (3.1.10)
     bcrypt-ruby (3.1.5)
       bcrypt (>= 3.1.3)
+    bootstrap-datepicker-rails (1.3.1.1)
+      railties (>= 3.0)
     bootstrap-sass (3.3.3)
       autoprefixer-rails (>= 5.0.0.1)
       sass (>= 3.2.19)
@@ -212,6 +214,7 @@ DEPENDENCIES
   autoprefixer-rails
   aws-sdk-v1
   bcrypt-ruby (~> 3.1.2)
+  bootstrap-datepicker-rails
   bootstrap-sass
   bootstrap_form
   cancancan (~> 1.9)

@@ -1,0 +1,48 @@
+<%= bootstrap_form_for [@business, @deal] do |f| %>
+
+    <%= f.alert_message "Please fix the errors below." %>
+
+    <div class="field">
+        <%= f.form_group :status, label: { text: 'Status' } do %>
+            <%= f.radio_button :status, 'active', checked: true, label: 'Active' %>
+            <%= f.radio_button :status, 'disabled', label: 'Disabled' %>
+        <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.text_field :start_date, class: 'start-date' %>
+    </div>
+
+    <div class="field">
+      <%= f.text_field :end_date, class: 'end-date' %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'Locations' %>
+      <% @business.locations.each do |location| %>
+            <%= check_box_tag 'deal[location_ids][]', location.id, @deal.locations.include?(location) %>
+            <%= location.address %>
+        <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.collection_check_boxes(:deal, :location_ids, @business.locations, :id, :street) %>
+    </div>
+
+    <div class="field">
+      <%= label_tag 'Days Available' %>
+      <% Date::DAYNAMES.each do |day| %>
+          <%= f.check_box day.downcase.to_sym, {}, true, false %>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.text_area :description %>
+    </div>
+
+
+    <div class="actions">
+      <%= f.submit 'Save' %>
+    </div>
+
+<% end %>

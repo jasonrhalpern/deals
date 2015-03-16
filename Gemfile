@@ -8,6 +8,7 @@ gem 'sqlite3'
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
 gem 'autoprefixer-rails'
+gem 'bootstrap-datepicker-rails'
 
 gem 'chosen-rails'
 gem 'sass-rails', '~> 4.0.1'
