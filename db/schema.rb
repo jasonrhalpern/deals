@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150315185733) do
+ActiveRecord::Schema.define(version: 20150316172949) do
 
   create_table "businesses", force: true do |t|
     t.string   "name"
@@ -40,13 +40,13 @@ ActiveRecord::Schema.define(version: 20150315185733) do
     t.text     "description"
     t.date     "start_date"
     t.date     "end_date"
-    t.boolean  "monday"
-    t.boolean  "tuesday"
-    t.boolean  "wednesday"
-    t.boolean  "thursday"
-    t.boolean  "friday"
-    t.boolean  "saturday"
-    t.boolean  "sunday"
+    t.boolean  "monday",      default: false
+    t.boolean  "tuesday",     default: false
+    t.boolean  "wednesday",   default: false
+    t.boolean  "thursday",    default: false
+    t.boolean  "friday",      default: false
+    t.boolean  "saturday",    default: false
+    t.boolean  "sunday",      default: false
     t.integer  "business_id"
     t.datetime "created_at"
     t.datetime "updated_at"

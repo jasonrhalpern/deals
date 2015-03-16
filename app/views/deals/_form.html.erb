@@ -18,16 +18,9 @@
     </div>
 
     <div class="field">
-      <%= label_tag 'Locations' %>
-      <% @business.locations.each do |location| %>
-            <%= check_box_tag 'deal[location_ids][]', location.id, @deal.locations.include?(location) %>
-            <%= location.address %>
-        <% end %>
+      <%= f.collection_check_boxes(:location_ids, @business.locations, :id, :address, { label: 'Locations'}) %>
     </div>
 
-    <div class="field">
-      <%= f.collection_check_boxes(:deal, :location_ids, @business.locations, :id, :street) %>
-    </div>
 
     <div class="field">
       <%= label_tag 'Days Available' %>

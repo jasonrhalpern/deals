@@ -6,7 +6,7 @@
 <p>
   <strong>Locations:</strong>
   <% deal.locations.each do |location| %>
-    location.address
+    <%= location.address %>
   <% end %>
 </p>
 
@@ -27,11 +27,13 @@
 
 <p>
   <strong>Days Available:</strong>
-  <% Date::DAYNAMES.each do |day| %>
-      <% if(deal.instance_variable_get("@{day.downcase}") == true) %>
-        <%= day %>
-      <% end %>
-  <% end %>
+  <%= 'Sunday' if deal.sunday %>
+  <%= 'Monday' if deal.monday %>
+  <%= 'Tuesday' if deal.tuesday %>
+  <%= 'Wednesday' if deal.wednesday %>
+  <%= 'Thursday' if deal.thursday %>
+  <%= 'Friday' if deal.friday %>
+  <%= 'Saturday' if deal.saturday %>
 </p>
 
 <%= link_to 'Edit', edit_business_deal_path(@business, deal) %>
