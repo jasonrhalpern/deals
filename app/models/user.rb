@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   has_one :business, inverse_of: :user
-  has_many :user_roles
+  has_many :user_roles, inverse_of: :user
   has_many :roles, :through => :user_roles
-  has_many :favorites
+  has_many :favorites, inverse_of: :user
   has_many :favorite_businesses, :through => :favorites, :source => :location
   has_attached_file :avatar,
                     #:styles => { :medium => "300x300>", :thumb => "100x100>" },

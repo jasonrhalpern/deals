@@ -7,11 +7,11 @@ describe LocationDeal do
   end
 
   it 'is invalid without a location' do
-    expect(build_stubbed(:location_deal, location: nil)).to have(1).errors_on(:location_id)
+    expect(build_stubbed(:location_deal, location: nil)).to have(1).errors_on(:location)
   end
 
   it 'is invalid without a deal' do
-    expect(build_stubbed(:location_deal, deal: nil)).to have(1).errors_on(:deal_id)
+    expect(build_stubbed(:location_deal, deal: nil)).to have(1).errors_on(:deal)
   end
 
   it 'is invalid if the deal is already associated with this location' do

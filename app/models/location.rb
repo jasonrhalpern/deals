@@ -1,8 +1,8 @@
 class Location < ActiveRecord::Base
   geocoded_by :address
-  has_many :location_deals, dependent: :destroy
+  has_many :location_deals, inverse_of: :location, dependent: :destroy
   has_many :deals, :through => :location_deals
-  has_many :favorites
+  has_many :favorites, inverse_of: :location
   has_many :favorited, :through => :favorites, :source => :user
   belongs_to :business, inverse_of: :locations
 
