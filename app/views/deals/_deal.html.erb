@@ -17,12 +17,12 @@
 
 <p>
   <strong>Starts:</strong>
-  <%= deal.start_date %>
+  <%= deal.start_date.to_formatted_s :long_ordinal %>
 </p>
 
 <p>
   <strong>Ends:</strong>
-  <%= deal.end_date %>
+  <%= deal.end_date.to_formatted_s :long_ordinal %>
 </p>
 
 <p>
