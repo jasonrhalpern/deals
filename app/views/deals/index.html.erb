@@ -2,10 +2,7 @@
 <%= link_to 'Add Deal', new_business_deal_path(@business) %>
 
 <% if @deals.blank? %>
-
     <h4>You do not currently have any deals listed for your business</h4>
-
 <% else %>
     <%= render @deals %>
-
 <% end %>

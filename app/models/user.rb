@@ -19,7 +19,7 @@ class User < ActiveRecord::Base
   validate :password_complexity
 
   devise :database_authenticatable, :registerable, :confirmable,
-         :recoverable, :rememberable, :trackable
+         :recoverable, :rememberable, :trackable, :lockable
 
   def password_complexity
     if password.present? and not password.match(/^(?=.*[\d[!@#$%\^*()_\-=?|;:.,<>]])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%\^*()_\-=?|;:.,<>]*$/)

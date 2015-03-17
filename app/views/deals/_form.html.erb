@@ -18,14 +18,18 @@
     </div>
 
     <div class="field">
-      <%= f.collection_check_boxes(:location_ids, @business.locations, :id, :address, { label: 'Locations'}) %>
+      <% if @business.locations.empty? %>
+          <strong>Locations </strong>Please click <%= link_to 'here', new_business_location_path(@business) %> to add a location for your business
+      <% else %>
+          <%= f.collection_check_boxes(:location_ids, @business.locations, :id, :address, { label: 'Locations'}) %>
+      <% end %>
     </div>
 
 
     <div class="field">
       <%= label_tag 'Days Available' %>
       <% Date::DAYNAMES.each do |day| %>
-          <%= f.check_box day.downcase.to_sym, {}, true, false %>
+          <%= f.check_box day.downcase.to_sym, {}, 'true', 'false' %>
       <% end %>
     </div>
 

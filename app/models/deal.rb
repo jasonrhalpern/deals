@@ -13,7 +13,7 @@ class Deal < ActiveRecord::Base
   def day_of_week
     if monday.blank? && tuesday.blank? && wednesday.blank? && thursday.blank? &&
         friday.blank? && saturday.blank? && sunday.blank?
-      errors.add :base, 'Days Available - select at least one day of the week'
+      errors.add :base, 'Please select at least one day of the week'
     end
   end
 
