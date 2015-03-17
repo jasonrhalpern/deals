@@ -6,17 +6,11 @@ class Deal < ActiveRecord::Base
   belongs_to :business, inverse_of: :deals
 
   validates :status, :description, :start_date, :end_date, :business_id, presence: true
-  validate :start_date_before_end_date, :at_least_one_location, :at_least_one_day_of_week
+  validate :start_date_before_end_date, :at_least_one_day_of_week
 
   def start_date_before_end_date
     if start_date.present? && end_date.present? && (end_date < start_date)
       errors.add :end_date, "needs to be after the start date"
-    end
-  end
-
-  def at_least_one_location
-    if location_deals.blank?
-      errors.add :base, 'Please select a location'
     end
   end
 

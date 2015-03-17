@@ -14,12 +14,15 @@
 </p>
 
 <p>
+  <strong>Locations:</strong>
   <% if deal.locations.present? %>
-      <strong>Locations:</strong>
+      <% deal.locations.each do |location| %>
+          <%= location.address %>
+      <% end %>
+  <% else %>
+    This deal is not connected to any of your locations. Please edit the deal to add a location.
   <% end %>
-  <% deal.locations.each do |location| %>
-    <%= location.address %>
-  <% end %>
+
 </p>
 
 <p>
