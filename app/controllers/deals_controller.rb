@@ -5,6 +5,7 @@ class DealsController < ApplicationController
   before_filter :authenticate_user!
 
   def index
+    @deals = @deals.includes(:locations)
   end
 
   def new
@@ -12,6 +13,7 @@ class DealsController < ApplicationController
 
 
   def create
+    authorize_locations(params[:deal][:location_ids])
     if @deal.save
       redirect_to business_deals_path(@business), notice: 'This deal was successfully added.'
     else
@@ -23,6 +25,7 @@ class DealsController < ApplicationController
   end
 
   def update
+    authorize_locations(params[:deal][:location_ids])
     if @deal.update_attributes(deal_params)
       redirect_to business_deals_path(@business), notice: 'This deal was successfully updated.'
     else
@@ -37,9 +40,20 @@ class DealsController < ApplicationController
 
   private
 
+  def authorize_locations(location_ids)
+    if location_ids.present?
+      location_ids.each do |id|
+        if id.present?
+          location = Location.find(id)
+          authorize! :read, location
+        end
+      end
+    end
+  end
+
   def deal_params
     params.require(:deal).permit(:status, :description, :start_date, :end_date, :monday, :tuesday,
-                                :wednesday, :thursday, :friday, :saturday, :sunday, {:location_ids => []})
+                                :wednesday, :thursday, :friday, :saturday, :sunday, :location_ids => [])
   end
 
 end

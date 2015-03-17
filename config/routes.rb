@@ -4,7 +4,7 @@ Rails.application.routes.draw do
 
   devise_for :users
 
-  resources :businesses do
+  resources :businesses, :path => 'merchants' do
     resources :locations
     resources :deals
   end

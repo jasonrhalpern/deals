@@ -6,20 +6,24 @@ class Deal < ActiveRecord::Base
   belongs_to :business, inverse_of: :deals
 
   validates :status, :description, :start_date, :end_date, :business_id, presence: true
-  validate :day_of_week
-  validate :start_date_before_end_date
-
-
-  def day_of_week
-    if monday.blank? && tuesday.blank? && wednesday.blank? && thursday.blank? &&
-        friday.blank? && saturday.blank? && sunday.blank?
-      errors.add :base, 'Please select at least one day of the week'
-    end
-  end
+  validate :start_date_before_end_date, :at_least_one_location, :at_least_one_day_of_week
 
   def start_date_before_end_date
     if start_date.present? && end_date.present? && (end_date < start_date)
       errors.add :end_date, "needs to be after the start date"
+    end
+  end
+
+  def at_least_one_location
+    if location_deals.blank?
+      errors.add :base, 'Please select a location'
+    end
+  end
+
+  def at_least_one_day_of_week
+    if monday.blank? && tuesday.blank? && wednesday.blank? && thursday.blank? &&
+        friday.blank? && saturday.blank? && sunday.blank?
+      errors.add :base, 'Please select at least one day of the week'
     end
   end
 

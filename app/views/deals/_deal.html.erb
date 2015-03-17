@@ -4,20 +4,6 @@
 </p>
 
 <p>
-  <% if deal.locations.present? %>
-      <strong>Locations:</strong>
-  <% end %>
-  <% deal.locations.each do |location| %>
-    <%= location.address %>
-  <% end %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= deal.description %>
-</p>
-
-<p>
   <strong>Starts:</strong>
   <%= deal.start_date.to_formatted_s :long_ordinal %>
 </p>
@@ -28,15 +14,30 @@
 </p>
 
 <p>
+  <% if deal.locations.present? %>
+      <strong>Locations:</strong>
+  <% end %>
+  <% deal.locations.each do |location| %>
+    <%= location.address %>
+  <% end %>
+</p>
+
+<p>
   <strong>Days Available:</strong>
-  <%= 'Sunday' if deal.sunday %>
   <%= 'Monday' if deal.monday %>
   <%= 'Tuesday' if deal.tuesday %>
   <%= 'Wednesday' if deal.wednesday %>
   <%= 'Thursday' if deal.thursday %>
   <%= 'Friday' if deal.friday %>
   <%= 'Saturday' if deal.saturday %>
+  <%= 'Sunday' if deal.sunday %>
 </p>
+
+<p>
+  <strong>Description:</strong>
+  <%= deal.description %>
+</p>
+
 
 <%= link_to 'Edit', edit_business_deal_path(@business, deal) %>
 <%= link_to 'Delete', business_deal_path(@business, deal), method: :delete, data: { confirm: 'Are you sure?' } %>
