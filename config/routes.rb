@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  root :to => "home#index"
+  root :to => 'home#index'
 
   devise_for :users
 
@@ -8,5 +8,7 @@ Rails.application.routes.draw do
     resources :locations
     resources :deals
   end
+
+  get '/search', to: 'search#index'
 
 end
