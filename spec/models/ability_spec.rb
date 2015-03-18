@@ -16,6 +16,12 @@ describe "Ability" do
       assert @ability.cannot?(:crud, @user_two)
     end
 
+    it "can crud his own favorite, but not the favorites of others" do
+      assert @ability.can?(:crud, Favorite.new(:user => @user))
+      assert @ability.cannot?(:crud, Favorite.new)
+      assert @ability.cannot?(:crud, Favorite.new(:user => @user_two))
+    end
+
     it "can crud his own business, but not the businesses of other users" do
       assert @ability.can?(:crud, Business.new(:user => @user))
       assert @ability.cannot?(:crud, Business.new)
@@ -44,6 +50,11 @@ describe "Ability" do
     it "can crud himself and other users" do
       assert @ability.can?(:crud, @admin)
       assert @ability.can?(:crud, User.new)
+    end
+
+    it "can crud his own favorites and the favorites of others" do
+      assert @ability.can?(:crud, Favorite.new(:user => @user))
+      assert @ability.can?(:crud, Favorite.new)
     end
 
     it "can crud his own business and those of other users" do
