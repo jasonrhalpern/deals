@@ -10,14 +10,14 @@
     </div>
 
     <div class="field">
+      <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name, @business.category.blank? ? "" : @business.category_id), include_blank: ""  %>
+    </div>
+
+    <div class="field">
       <%= f.file_field :avatar %>
       <% if @business.avatar.exists? %>
           <%= image_tag @business.avatar.url %><br/>
       <% end %>
-    </div>
-
-    <div class="field">
-      <%= f.select :category_id, options_from_collection_for_select(Category.all, :id, :name, @business.category.blank? ? "" : @business.category_id), include_blank: ""  %>
     </div>
 
     <div class="actions">

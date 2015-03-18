@@ -26,6 +26,11 @@ describe Business do
     expect(build_stubbed(:business, user: nil)).to have(1).errors_on(:user_id)
   end
 
+  it 'is invalid without a unique website' do
+    biz = create(:business)
+    expect(build_stubbed(:business, website: biz.website)).to have(1).errors_on(:website)
+  end
+
   it 'is has 3 locations' do
     expect(create(:business_with_locations).locations.count).to eq(3)
   end

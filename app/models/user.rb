@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
 
   def password_complexity
     if password.present? and not password.match(/^(?=.*[\d[!@#$%\^*()_\-=?|;:.,<>]])(?=.*[a-zA-Z])[a-zA-Z0-9!@#$%\^*()_\-=?|;:.,<>]*$/)
-      errors.add :password, 'must contain at least one letter and one number or special character.'
+      errors.add :password, 'must contain at least one letter and one number or special character'
     end
   end
 

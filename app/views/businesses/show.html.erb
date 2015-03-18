@@ -9,15 +9,15 @@
 </p>
 
 <p>
+  <strong>Category:</strong>
+  <%= @business.category.name %>
+</p>
+
+<p>
   <strong>Image:</strong>
   <% if @business.avatar.exists? %>
       <%= image_tag @business.avatar.url %><br/>
   <% end %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= @business.category.name %>
 </p>
 
 <%= link_to 'Edit', edit_business_path(@business) %>

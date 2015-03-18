@@ -9,6 +9,7 @@ class Business < ActiveRecord::Base
                     :bucket => "assets-localstoo";
 
   validates :name, :website, :category_id, :user_id, presence: true
+  validates :website, uniqueness: true
   validates :avatar,
             presence: true,
             attachment_content_type: { content_type: /\Aimage\/.*\Z/ },
