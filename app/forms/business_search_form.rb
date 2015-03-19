@@ -27,7 +27,8 @@ class BusinessSearchForm
 
 
   def find_nearby_deals
-    deals = Location.near(location, distance, :select => "deals.id").joins(:deals).where(:deals => { :sunday => true })
+    deals = Location.near(location, distance, :select => "deals.*").joins(:deals)
+    deals = deals.where("deals.#{day_of_week.downcase}" => true) if day_of_week.present?
     deals.map{|deal| deal.id}
   end
 
