@@ -21,18 +21,14 @@ class BusinessSearchForm
   private
 
   def find_search_results
-    locations = find_nearby_locations
-    locations
+    deals = find_nearby_deals
+    deals
   end
 
 
-  def find_nearby_locations
-    locations = Location.near(location, distance).joins(:business).preload(:business)
-    location_ids = []
-    locations.each do |location|
-      location_ids << location.id
-    end
-    location_ids
+  def find_nearby_deals
+    deals = Location.near(location, distance, :select => "deals.id").joins(:deals).where(:deals => { :sunday => true })
+    deals.map{|deal| deal.id}
   end
 
 end
