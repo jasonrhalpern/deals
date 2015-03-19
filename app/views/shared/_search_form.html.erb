@@ -1,0 +1,21 @@
+<%= bootstrap_form_for @business_search_form, url: search_path, :method => "get" do |f| %>
+
+    <div class="field">
+      <%= f.select :category, options_from_collection_for_select(Category.all, :id, :name, params[:business_search_form] ? params[:business_search_form][:category] : ''), { :prompt => 'All' } %>
+    </div>
+
+    <div class="field">
+      <%= f.select :day_of_week, Date::DAYNAMES, { :prompt => 'Any' } %>
+    </div>
+
+    <div class="field">
+        <%= f.select :distance, options_for_select({ '1 mile' => '1', '5 miles' => '5', '10 miles' => '10'}, params[:business_search_form] ? params[:business_search_form][:distance] : '1') %>
+    </div>
+
+    <div class="field">
+      <%= f.text_field :location, :placeholder => "Enter address, city, town or zip code" %>
+    </div>
+
+    <%= f.submit "Search" %>
+
+<% end %>

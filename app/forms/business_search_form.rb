@@ -1,7 +1,7 @@
 class BusinessSearchForm
   include ActiveModel::Model
 
-  validates :category, :day_of_week, :location, :distance, presence: true
+  validates :location, :distance, presence: true
 
   attr_accessor :category, :day_of_week, :location, :distance, :results
 
