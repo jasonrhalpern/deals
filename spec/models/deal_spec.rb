@@ -42,6 +42,13 @@ describe Deal do
     expect(create(:deal_with_locations).location_deals.count).to eq(2)
   end
 
+  it 'returns an array of active deals' do
+    deal1 = create(:deal)
+    deal2 = create(:disabled_deal)
+    deal3 = create(:deal)
+    expect(Deal.active).to eq([deal1, deal3])
+  end
+
   it "destroys the associated location deals" do
     deal = create(:deal)
     location_deal = create(:location_deal, :deal => deal)

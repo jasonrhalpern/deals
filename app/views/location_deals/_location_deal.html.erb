@@ -1,0 +1,56 @@
+<p>
+  <% if result.location.business.avatar.exists? %>
+      <%= image_tag result.location.business.avatar.url %><br/>
+  <% end %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= result.location.business.name %>
+</p>
+
+<p>
+  <strong>Website:</strong>
+  <%= result.location.business.website %>
+</p>
+
+<p>
+  <strong>Category:</strong>
+  <%= result.location.business.category.name %>
+</p>
+
+<p>
+  <strong>Address:</strong>
+  <%= result.location.address %>
+</p>
+
+<p>
+  <strong>Phone Number:</strong>
+  <%= result.location.phone_number %>
+</p>
+
+<p>
+  <strong>Starts:</strong>
+  <%= result.deal.start_date.to_formatted_s :long_ordinal %>
+</p>
+
+<p>
+  <strong>Ends:</strong>
+  <%= result.deal.end_date.to_formatted_s :long_ordinal %>
+</p>
+
+<p>
+  <strong>Days Available:</strong>
+  <%= 'Monday' if result.deal.monday %>
+  <%= 'Tuesday' if result.deal.tuesday %>
+  <%= 'Wednesday' if result.deal.wednesday %>
+  <%= 'Thursday' if result.deal.thursday %>
+  <%= 'Friday' if result.deal.friday %>
+  <%= 'Saturday' if result.deal.saturday %>
+  <%= 'Sunday' if result.deal.sunday %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= result.deal.description %>
+</p>

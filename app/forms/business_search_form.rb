@@ -21,17 +21,17 @@ class BusinessSearchForm
   private
 
   def find_search_results
-    nearby_deal_ids = find_nearby_deals #these are in the right distance order
-    deals = Deal.includes(:locations, :business => :category).where(id: nearby_deal_ids)
-    deals = deals.where(:businesses => {:category_id => category}) if category.present?
-    nearby_deal_ids.map{|id| deals.detect{|deal| deal.id == id}}
+    location_deal_ids = find_nearby_deals #these are in the right distance order
+    deals = LocationDeal.includes(:deal, :location => { :business => :category }).where(id: location_deal_ids)
+    deals = deals.where(:businesses => { :category_id => category }) if category.present?
+    deals = deals.where(:deals => { "#{day_of_week.downcase}" => true }) if day_of_week.present?
+    location_deal_ids.map{ |id| deals.detect{ |deal| deal.id == id } } #put back in distance order
   end
 
 
   def find_nearby_deals
-    deals = Location.near(location, distance, :select => "deals.*").joins(:deals)
-    deals = deals.where("deals.#{day_of_week.downcase}" => true) if day_of_week.present?
-    deals.map{|deal| deal.id}
+    location_deals = Location.near(location, distance, :select => "location_deals.*").joins(:location_deals)
+    location_deals.map{ |location_deal| location_deal.id }
   end
 
 end

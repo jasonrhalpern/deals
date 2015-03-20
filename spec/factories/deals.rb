@@ -24,4 +24,8 @@ FactoryGirl.define do
     end
   end
 
+  factory :disabled_deal,  parent: :deal do
+    status :disabled
+  end
+
 end

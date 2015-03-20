@@ -8,6 +8,8 @@ class Deal < ActiveRecord::Base
   validates :status, :start_date, :end_date, :description, :business_id, presence: true
   validate :start_date_before_end_date, :at_least_one_day_of_week
 
+  scope :active, -> { where status: Deal.statuses[:active] }
+
   def start_date_before_end_date
     if start_date.present? && end_date.present? && (end_date <= start_date)
       errors.add :end_date, "needs to be after the start date"
