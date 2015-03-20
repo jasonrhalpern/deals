@@ -24,8 +24,7 @@ class BusinessSearchForm
     nearby_deal_ids = find_nearby_deals #these are in the right distance order
     deals = Deal.includes(:locations, :business => :category).where(id: nearby_deal_ids)
     deals = deals.where(:businesses => {:category_id => category}) if category.present?
-    # deals = deals.map{|deal| deal.id}
-    deals
+    nearby_deal_ids.map{|id| deals.detect{|deal| deal.id == id}}
   end
 
 
