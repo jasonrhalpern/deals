@@ -11,8 +11,8 @@ class BusinessSearchForm
     self.location = params[:location]
     self.distance = params[:distance]
     if valid?
-      self.results = find_search_results
-      self.results.reject!(&:blank?)
+      results = find_search_results
+      self.results = results.reject!(&:blank?)
       true
     else
       false
@@ -22,10 +22,11 @@ class BusinessSearchForm
   private
 
   def find_search_results
-    location_deal_ids = find_nearby_deals #these are in the right distance order
+    location_deal_ids = find_nearby_deals #these are in increasing distance order
     deals = LocationDeal.includes(:deal, :location => { :business => :category }).where(id: location_deal_ids)
     deals = deals.where(:businesses => { :category_id => category }) if category.present?
     deals = deals.where(:deals => { "#{day_of_week.downcase}" => true }) if day_of_week.present?
+    deals = deals.active.current
     location_deal_ids.map{ |id| deals.detect{ |deal| deal.id == id } } #put back in distance order
   end
 
