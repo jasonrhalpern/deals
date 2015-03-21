@@ -5,12 +5,12 @@
 
 <p>
   <strong>Starts:</strong>
-  <%= deal.start_date.to_formatted_s :long_ordinal %>
+  <%= display_full_date(deal.start_date) %>
 </p>
 
 <p>
   <strong>Ends:</strong>
-  <%= deal.end_date.to_formatted_s :long_ordinal %>
+  <%= display_full_date(deal.end_date) %>
 </p>
 
 <p>
@@ -27,13 +27,7 @@
 
 <p>
   <strong>Days Available:</strong>
-  <%= 'Monday' if deal.monday %>
-  <%= 'Tuesday' if deal.tuesday %>
-  <%= 'Wednesday' if deal.wednesday %>
-  <%= 'Thursday' if deal.thursday %>
-  <%= 'Friday' if deal.friday %>
-  <%= 'Saturday' if deal.saturday %>
-  <%= 'Sunday' if deal.sunday %>
+  <%= display_days(deal) %>
 </p>
 
 <p>

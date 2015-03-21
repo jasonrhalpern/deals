@@ -30,24 +30,13 @@
 </p>
 
 <p>
-  <strong>Starts:</strong>
-  <%= location_deal.deal.start_date.to_formatted_s :long_ordinal %>
-</p>
-
-<p>
-  <strong>Ends:</strong>
-  <%= location_deal.deal.end_date.to_formatted_s :long_ordinal %>
+  <strong>Dates Available :</strong>
+  <%= "#{display_full_date(location_deal.deal.start_date)} - #{display_full_date(location_deal.deal.end_date)}" %>
 </p>
 
 <p>
   <strong>Days Available:</strong>
-  <%= 'Monday' if location_deal.deal.monday %>
-  <%= 'Tuesday' if location_deal.deal.tuesday %>
-  <%= 'Wednesday' if location_deal.deal.wednesday %>
-  <%= 'Thursday' if location_deal.deal.thursday %>
-  <%= 'Friday' if location_deal.deal.friday %>
-  <%= 'Saturday' if location_deal.deal.saturday %>
-  <%= 'Sunday' if location_deal.deal.sunday %>
+  <%= display_days(location_deal.deal) %>
 </p>
 
 <p>
