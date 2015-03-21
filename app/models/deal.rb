@@ -23,4 +23,8 @@ class Deal < ActiveRecord::Base
     end
   end
 
+  def self.current
+    where('start_date <= ? AND ? <= end_date', Date.today + 11.days, Date.today)
+  end
+
 end

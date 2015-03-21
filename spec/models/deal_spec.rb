@@ -49,6 +49,18 @@ describe Deal do
     expect(Deal.active).to eq([deal1, deal3])
   end
 
+  it 'returns an array of current deals' do
+    deal1 = create(:deal, :start_date => Date.today, :end_date => Date.tomorrow)
+    deal2 = create(:deal, :start_date => Date.today - 3.days, :end_date => Date.today - 1.day)
+    deal3 = create(:deal, :start_date => Date.today - 1.week, :end_date => Date.today + 1.month)
+    deal4 = create(:deal, :start_date => Date.today - 1.day, :end_date => Date.today + 1.day)
+    deal5 = create(:deal, :start_date => Date.today + 3.weeks, :end_date => Date.today + 4.weeks)
+    deal6 = create(:deal, :start_date => Date.today + 1.week, :end_date => Date.today + 2.weeks)
+    deal7 = create(:deal, :start_date => Date.yesterday, :end_date => Date.tomorrow)
+
+    expect(Deal.current).to eq([deal1, deal3, deal4, deal6, deal7])
+  end
+
   it "destroys the associated location deals" do
     deal = create(:deal)
     location_deal = create(:location_deal, :deal => deal)
