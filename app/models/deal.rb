@@ -1,4 +1,5 @@
 class Deal < ActiveRecord::Base
+  extend DateFormer
   enum status: [ :active, :disabled ] #DO NOT change this order
 
   has_many :location_deals, inverse_of: :deal, dependent: :destroy
@@ -23,8 +24,10 @@ class Deal < ActiveRecord::Base
     end
   end
 
-  def self.current
-    where('start_date <= ? AND ? <= end_date', Date.today + 11.days, Date.today)
+  def self.current(day_of_week)
+    day = get_date_from_day(day_of_week)
+    where('start_date <= ? AND ? <= end_date', day + upcoming_deal_days, day)
   end
+
 
 end

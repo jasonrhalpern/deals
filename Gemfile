@@ -33,6 +33,8 @@ gem 'geocoder'
 
 gem 'kaminari'
 
+gem 'chronic'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'capybara'

@@ -57,7 +57,7 @@ describe Deal do
     deal5 = create(:deal, :start_date => Date.today + 3.weeks, :end_date => Date.today + 4.weeks)
     deal6 = create(:deal, :start_date => Date.today + 1.week, :end_date => Date.today + 2.weeks)
 
-    expect(Deal.current).to eq([deal1, deal3, deal4, deal6])
+    expect(Deal.current(Date.today)).to eq([deal1, deal3, deal4, deal6])
   end
 
   it "destroys the associated location deals" do
