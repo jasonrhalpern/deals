@@ -11,8 +11,8 @@ class BusinessSearchForm
     self.location = params[:location]
     self.distance = params[:distance]
     if valid?
-      results = find_search_results
-      self.results = results.reject!(&:blank?)
+      self.results = find_search_results
+      self.results.reject!(&:blank?)
       true
     else
       false
