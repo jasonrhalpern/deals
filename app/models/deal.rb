@@ -26,7 +26,7 @@ class Deal < ActiveRecord::Base
 
   def self.current(day_of_week)
     day = get_date_from_day(day_of_week)
-    where('start_date <= ? AND ? <= end_date', day + upcoming_deal_days, day)
+    where('start_date <= ? AND ? <= end_date', day + upcoming_deal_period, day)
   end
 
 

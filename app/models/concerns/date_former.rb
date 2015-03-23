@@ -12,8 +12,8 @@ module DateFormer
     end
   end
 
-  def upcoming_deal_days
-    8.days
+  def upcoming_deal_period
+    1.week
   end
 
 end

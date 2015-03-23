@@ -43,7 +43,7 @@ describe LocationDeal do
     expect(LocationDeal.current(Date.today)).to eq([location_deal1, location_deal3, location_deal5])
   end
 
-  it 'can get the date of a day of the week' do
+  it 'can get the date from a day of the week' do
     tomorrow = Date::DAYNAMES[Date.tomorrow.wday]
     expect(LocationDeal.get_date_from_day(tomorrow)).to eq(Date.tomorrow)
   end

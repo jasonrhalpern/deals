@@ -10,6 +10,6 @@ class LocationDeal < ActiveRecord::Base
 
   def self.current(day_of_week)
     day = get_date_from_day(day_of_week)
-    joins(:deal).where('deals.start_date <= ? AND ? <= deals.end_date', day + upcoming_deal_days, day)
+    joins(:deal).where('deals.start_date <= ? AND ? <= deals.end_date', day + upcoming_deal_period, day)
   end
 end
