@@ -3,7 +3,12 @@
 <% if @location_deals.blank? %>
     <h4>There are currently no deals that match your search</h4>
 <% else %>
-    <%= render @location_deals %>
+    <% business_id = nil, locals = {} %>
+    <% @location_deals.each do |location_deal| %>
+        <% locals[:next_business] = (business_id == location_deal.location.business.id) ? false : true %>
+        <%= render partial: location_deal, locals: locals %>
+        <% business_id = location_deal.location.business.id %>
+    <% end %>
 <% end %>
 
 
