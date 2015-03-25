@@ -1,5 +1,5 @@
 class SearchController < ApplicationController
-  before_filter :authenticate_user!, :only => []
+  before_action :authenticate_user!, :only => []
 
   def index
     @business_search_form = BusinessSearchForm.new

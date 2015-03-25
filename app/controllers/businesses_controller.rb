@@ -1,7 +1,7 @@
 class BusinessesController < ApplicationController
-  load_and_authorize_resource
+  load_and_authorize_resource :except => [:profile]
 
-  before_filter :authenticate_user!
+  before_action :authenticate_user!, :except => [:profile]
 
   def new
     if current_user.business.present?
@@ -37,6 +37,14 @@ class BusinessesController < ApplicationController
   def destroy
     @business.destroy
     redirect_to new_business_path, notice: 'This business was deleted.'
+  end
+
+  def profile
+    @business = Business.includes(:category, :locations).where(:id => params[:id], :locations => {id: params[:lid]}).first
+    @location_deals = LocationDeal.includes(:deal).where(:location_id => params[:lid])
+    @other_locations = Location.where(:business_id => params[:id]).where.not(id: params[:lid])
+
+    redirect_to root_path, :flash => { :error => 'This business was not found' } if @business.blank?
   end
 
   private

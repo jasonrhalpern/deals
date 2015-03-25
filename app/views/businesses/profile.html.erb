@@ -1,0 +1,14 @@
+<%= render partial:  "businesses/business_location",
+           locals: { :business => @business, :location => @business.locations.first } %>
+
+<% @location_deals.each do |location_deal| %>
+    <%= render partial: "deals/deal_snippet",
+               locals: { :deal => location_deal.deal } %>
+<% end %>
+
+<% if @other_locations.present? %>
+    <div>Other Locations</div>
+    <% @other_locations.each do |location| %>
+        <%= link_to location.address, profile_business_path(location.business, { :lid => location.id }) %>
+    <% end %>
+<% end %>

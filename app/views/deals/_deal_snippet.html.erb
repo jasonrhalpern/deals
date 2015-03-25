@@ -1,0 +1,14 @@
+<p>
+  <strong>Dates Available :</strong>
+  <%= "#{display_full_date(deal.start_date)} - #{display_full_date(deal.end_date)}" %>
+</p>
+
+<p>
+  <strong>Days Available:</strong>
+  <%= display_days(deal) %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= deal.description %>
+</p>

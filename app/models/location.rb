@@ -1,5 +1,5 @@
 class Location < ActiveRecord::Base
-  geocoded_by :address
+  geocoded_by :full_address
   has_many :location_deals, inverse_of: :location, dependent: :destroy
   has_many :deals, :through => :location_deals
   has_many :favorites, inverse_of: :location
@@ -12,7 +12,11 @@ class Location < ActiveRecord::Base
 
   after_validation :geocode
 
-  def address
+  def full_address
     [street, city, state, 'US', zip_code].compact.join(', ')
+  end
+
+  def address
+    [street, city, state, zip_code].compact.join(', ')
   end
 end

@@ -1,49 +1,12 @@
 <% if next_business %>
 
-<p>
-  <% if location_deal.location.business.avatar.exists? %>
-      <%= image_tag location_deal.location.business.avatar.url %><br/>
-  <% end %>
-</p>
+    <%= render partial: "businesses/business_location",
+               locals: { :business => location_deal.location.business, :location => location_deal.location } %>
 
-<p>
-  <strong>Name:</strong>
-  <%= location_deal.location.business.name %>
-</p>
-
-<p>
-  <strong>Website:</strong>
-  <%= location_deal.location.business.website %>
-</p>
-
-<p>
-  <strong>Category:</strong>
-  <%= location_deal.location.business.category.name %>
-</p>
-
-<p>
-  <strong>Address:</strong>
-  <%= location_deal.location.address %>
-</p>
-
-<p>
-  <strong>Phone Number:</strong>
-  <%= location_deal.location.phone_number %>
-</p>
+    <p><%= link_to 'View All Deals',
+                   profile_business_path(location_deal.location.business, { :lid => location_deal.location.id }) %></p>
 
 <% end %>
 
-<p>
-  <strong>Dates Available :</strong>
-  <%= "#{display_full_date(location_deal.deal.start_date)} - #{display_full_date(location_deal.deal.end_date)}" %>
-</p>
-
-<p>
-  <strong>Days Available:</strong>
-  <%= display_days(location_deal.deal) %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= location_deal.deal.description %>
-</p>
+<%= render partial: "deals/deal_snippet",
+           locals: { :deal => location_deal.deal } %>

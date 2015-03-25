@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :businesses, :path => 'merchants' do
     resources :locations
     resources :deals
+    get 'profile', on: :member
   end
 
   get '/search', to: 'search#index'
