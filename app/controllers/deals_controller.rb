@@ -6,6 +6,10 @@ class DealsController < ApplicationController
 
   def index
     @deals = @deals.includes(:locations)
+    if params[:lid].present?
+      deal_ids = @deals.where(:locations => { :id => params[:lid]}).pluck(:id)
+      @deals = @deals.where(id: deal_ids)
+    end
   end
 
   def new

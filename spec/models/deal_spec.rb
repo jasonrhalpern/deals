@@ -27,7 +27,11 @@ describe Deal do
   end
 
   it 'is invalid if the end date is before the start date' do
-    expect(build_stubbed(:deal, end_date: Date.yesterday)).to have(1).errors_on(:end_date)
+    expect(build_stubbed(:deal, start_date: Date.tomorrow, end_date: Date.today)).to have(1).errors_on(:end_date)
+  end
+
+  it 'is invalid if the end date is in the past' do
+    expect(build_stubbed(:deal, start_date: 2.days.ago.to_date, end_date: Date.yesterday)).to have(1).errors_on(:end_date)
   end
 
   it 'is invalid if a day of the week is not selected' do
@@ -51,13 +55,12 @@ describe Deal do
 
   it 'returns an array of current deals' do
     deal1 = create(:deal, :start_date => Date.yesterday, :end_date => Date.tomorrow)
-    deal2 = create(:deal, :start_date => Date.today - 3.days, :end_date => Date.today - 1.day)
-    deal3 = create(:deal, :start_date => Date.today - 1.week, :end_date => Date.today + 1.month)
-    deal4 = create(:deal, :start_date => Date.today - 1.day, :end_date => Date.today + 1.day)
-    deal5 = create(:deal, :start_date => Date.today + 3.weeks, :end_date => Date.today + 4.weeks)
-    deal6 = create(:deal, :start_date => Date.today + 1.week, :end_date => Date.today + 2.weeks)
+    deal2 = create(:deal, :start_date => Date.today - 1.week, :end_date => Date.today + 1.month)
+    deal3 = create(:deal, :start_date => Date.today - 1.day, :end_date => Date.today + 1.day)
+    deal4 = create(:deal, :start_date => Date.today + 3.weeks, :end_date => Date.today + 4.weeks)
+    deal5 = create(:deal, :start_date => Date.today + 1.week, :end_date => Date.today + 2.weeks)
 
-    expect(Deal.current(Date.today)).to eq([deal1, deal3, deal4, deal6])
+    expect(Deal.current(Date.today)).to eq([deal1, deal2, deal3, deal5])
   end
 
   it "destroys the associated location deals" do

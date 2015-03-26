@@ -22,7 +22,6 @@
   <% else %>
     This deal is not connected to any of your locations. Please edit the deal to select a location.
   <% end %>
-
 </p>
 
 <p>
@@ -37,4 +36,4 @@
 
 
 <%= link_to 'Edit', edit_business_deal_path(@business, deal) %>
-<%= link_to 'Delete', business_deal_path(@business, deal), method: :delete, data: { confirm: 'Are you sure?' } %>
+<%= link_to 'Delete', business_deal_path(@business, deal), method: :delete, data: { confirm: 'This will delete the deal at all the listed locations. Are you sure you want to delete it?' } %>

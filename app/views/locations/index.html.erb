@@ -2,10 +2,7 @@
 <%= link_to 'Add Location', new_business_location_path(@business) %>
 
 <% if @locations.blank? %>
-
     <h4>You do not currently have any locations listed for your business</h4>
-
 <% else %>
     <%= render @locations %>
-
 <% end %>

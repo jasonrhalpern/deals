@@ -43,6 +43,17 @@ describe LocationDeal do
     expect(LocationDeal.current(Date.today)).to eq([location_deal1, location_deal3, location_deal5])
   end
 
+  it 'returns an array of location deals associated with ongoing deals' do
+    deal1 = build(:deal, :end_date => Date.yesterday)
+    deal2 = build(:deal, :end_date => Date.tomorrow)
+    deal3 = build(:deal, :end_date => Date.today + 1.month)
+    location_deal1 = create(:location_deal, :deal => deal1)
+    location_deal2 = create(:location_deal, :deal => deal2)
+    location_deal3 = create(:location_deal, :deal => deal3)
+
+    expect(LocationDeal.upcoming).to eq([location_deal2, location_deal3])
+  end
+
   it 'can get the date from a day of the week' do
     tomorrow = Date::DAYNAMES[Date.tomorrow.wday]
     expect(LocationDeal.get_date_from_day(tomorrow)).to eq(Date.tomorrow)

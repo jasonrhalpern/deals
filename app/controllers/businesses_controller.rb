@@ -41,7 +41,7 @@ class BusinessesController < ApplicationController
 
   def profile
     @business = Business.includes(:category, :locations).where(:id => params[:id], :locations => {id: params[:lid]}).first
-    @location_deals = LocationDeal.includes(:deal).where(:location_id => params[:lid])
+    @location_deals = LocationDeal.includes(:deal).where(:location_id => params[:lid]).active.upcoming
     @other_locations = Location.where(:business_id => params[:id]).where.not(id: params[:lid])
 
     redirect_to root_path, :flash => { :error => 'This business was not found' } if @business.blank?

@@ -12,4 +12,8 @@ class LocationDeal < ActiveRecord::Base
     day = get_date_from_day(day_of_week)
     joins(:deal).where('deals.start_date <= ? AND ? <= deals.end_date', day + upcoming_deal_period, day)
   end
+
+  def self.upcoming
+    joins(:deal).where('? <= deals.end_date', Date.today)
+  end
 end

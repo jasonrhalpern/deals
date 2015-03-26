@@ -1,6 +1,6 @@
 <% if next_business %>
 
-    <%= render partial: "businesses/business_location",
+    <%= render partial: "shared/business_location",
                locals: { :business => location_deal.location.business, :location => location_deal.location } %>
 
     <p><%= link_to 'View All Deals',
@@ -8,5 +8,5 @@
 
 <% end %>
 
-<%= render partial: "deals/deal_snippet",
+<%= render partial: "shared/deal_snippet",
            locals: { :deal => location_deal.deal } %>
