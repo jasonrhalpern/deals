@@ -29,6 +29,6 @@
   <%= location.phone_number %>
 </p>
 
-<div id="favorite-button-<%= location.id %>">
+<div id="favorite-<%= location.id %>">
     <%= render partial: "favorites/favorite_button", locals: { :location => location } %>
 </div>
