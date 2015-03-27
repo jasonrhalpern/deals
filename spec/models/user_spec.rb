@@ -59,8 +59,14 @@ describe User do
     expect(create(:user_with_favorites).favorites.count).to eq(2)
   end
 
-  it 'has 2 favorite businesses' do
-    expect(create(:user_with_favorites).favorite_businesses.count).to eq(2)
+  it 'has favorited a specific location' do
+    favorite = create(:favorite)
+    user = favorite.user
+    expect(user.has_favorite?(favorite.location)).to be_truthy
+  end
+
+  it 'has 2 favorite locations' do
+    expect(create(:user_with_favorites).favorite_locations.count).to eq(2)
   end
 
 end

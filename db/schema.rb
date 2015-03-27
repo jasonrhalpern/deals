@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150317143804) do
+ActiveRecord::Schema.define(version: 20150327193023) do
 
   create_table "businesses", force: true do |t|
     t.string   "name"
@@ -60,6 +60,7 @@ ActiveRecord::Schema.define(version: 20150317143804) do
   end
 
   add_index "favorites", ["location_id"], name: "index_favorites_on_location_id"
+  add_index "favorites", ["user_id", "location_id"], name: "index_favorites_on_user_id_and_location_id"
   add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
 
   create_table "location_deals", force: true do |t|

@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   has_many :user_roles, inverse_of: :user
   has_many :roles, :through => :user_roles
   has_many :favorites, inverse_of: :user
-  has_many :favorite_businesses, :through => :favorites, :source => :location
+  has_many :favorite_locations, :through => :favorites, :source => :location
   has_attached_file :avatar,
                     #:styles => { :medium => "300x300>", :thumb => "100x100>" },
                     :storage => :s3,
@@ -33,5 +33,9 @@ class User < ActiveRecord::Base
 
   def has_role?(role_sym)
     roles.any? { |r| r.name.underscore.to_sym == role_sym }
+  end
+
+  def has_favorite?(location)
+    favorite_locations.exists?(id: location.id)
   end
 end

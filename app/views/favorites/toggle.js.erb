@@ -1,0 +1,2 @@
+$("#favorite-button-<%= @favorite.location_id %>").html("<%= j render partial: 'favorite_button',
+                                                                        locals: { :location => @favorite.location } %>");

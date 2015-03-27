@@ -1,0 +1,11 @@
+<% if user_signed_in? %>
+    <% unless current_user.has_favorite?(location) %>
+        <%= link_to favorites_path(:location_id => location.id), remote: true, method: :post do %>
+            <button>Add to Favorites</button>
+        <% end %>
+    <% else %>
+        <%= link_to delete_favorite_path(location, current_user), remote: true, method: :delete do %>
+            <button>Remove from Favorites</button>
+        <% end %>
+    <% end %>
+<% end %>

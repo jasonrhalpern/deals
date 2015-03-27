@@ -10,6 +10,8 @@ Rails.application.routes.draw do
     get 'profile', on: :member
   end
 
+  resources :favorites, :only => [:create, :destroy]
+
   get '/search', to: 'search#index'
 
 end
