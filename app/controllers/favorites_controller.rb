@@ -2,6 +2,10 @@ class FavoritesController < ApplicationController
 
   before_action :authenticate_user!
 
+  def index
+
+  end
+
   def create
     @favorite = Favorite.new(location_id: params[:location_id], user_id: current_user.id)
     authorize! :create, @favorite

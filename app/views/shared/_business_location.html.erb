@@ -30,5 +30,5 @@
 </p>
 
 <div id="favorite-<%= location.id %>">
-    <%= render partial: "favorites/favorite_button", locals: { :location => location } %>
+    <%= render partial: "favorites/favorite_button", locals: { :location => location, :ajax_update => false } %>
 </div>
