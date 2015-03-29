@@ -3,8 +3,21 @@ require 'rails_helper'
 describe FavoritesController do
   login_user
 
-  # describe "GET #index" do
-  # end
+  let(:johns_favorite) { create(:favorite, :user => @user) }
+
+  describe "GET #index" do
+    it "populates an array of all the favorites" do
+      favorite_one = create(:favorite, :user => @user)
+      favorite_two = create(:favorite, :user => @user)
+      get :index
+      expect(assigns(:favorites)).to match_array([favorite_one, favorite_two])
+    end
+
+    it "renders the :index template" do
+      get :index
+      expect(response).to render_template("index")
+    end
+  end
 
   describe "POST #create" do
     before(:each) do
