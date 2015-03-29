@@ -12,6 +12,8 @@ class FavoritesController < ApplicationController
     respond_to do |format|
       if @favorite.save
         format.js { render :toggle }
+      else
+        format.js { render :toggle }
       end
     end
   end
@@ -21,6 +23,8 @@ class FavoritesController < ApplicationController
     authorize! :destroy, @favorite
     respond_to do |format|
       if @favorite.destroy
+        format.js { render :toggle }
+      else
         format.js { render :toggle }
       end
     end
