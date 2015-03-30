@@ -1,22 +1,22 @@
 <p>
-  <% if business.avatar.exists? %>
-      <%= image_tag business.avatar.url %><br/>
+  <% if location.business.avatar.exists? %>
+      <%= image_tag location.business.avatar.url %><br/>
   <% end %>
 </p>
 
 <p>
   <strong>Name:</strong>
-  <%= business.name %>
+  <%= location.business.name %>
 </p>
 
 <p>
   <strong>Website:</strong>
-  <%= business.website %>
+  <%= location.business.website %>
 </p>
 
 <p>
   <strong>Category:</strong>
-  <%= business.category.name %>
+  <%= location.business.category.name %>
 </p>
 
 <p>

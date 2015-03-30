@@ -1,2 +1,4 @@
-<%= render partial: "shared/business_location",
-           locals: { :business => favorite.location.business, :location => favorite.location } %>
+<%= render partial: "shared/business_location", locals: { :location => favorite.location } %>
+
+<p><%= link_to 'View All Deals',
+               profile_business_path(favorite.location.business, { :lid => favorite.location.id }) %></p>

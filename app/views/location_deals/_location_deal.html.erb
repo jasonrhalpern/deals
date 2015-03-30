@@ -1,7 +1,6 @@
 <% if next_business %>
 
-    <%= render partial: "shared/business_location",
-               locals: { :business => location_deal.location.business, :location => location_deal.location } %>
+    <%= render partial: "shared/business_location", locals: { :location => location_deal.location } %>
 
     <p><%= link_to 'View All Deals',
                    profile_business_path(location_deal.location.business, { :lid => location_deal.location.id }) %></p>

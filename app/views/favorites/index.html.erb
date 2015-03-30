@@ -1,1 +1,7 @@
-<%= render @favorites %>
+<h1>Favorites</h1>
+
+<% if @favorites.blank? %>
+    <h4>You do not currently have any favorites</h4>
+<% else %>
+    <%= render @favorites %>
+<% end %>

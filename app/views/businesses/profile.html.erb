@@ -1,5 +1,4 @@
-<%= render partial:  "shared/business_location",
-           locals: { :business => @business, :location => @business.locations.first } %>
+<%= render partial:  "shared/business_location", locals: { :location => @business.locations.first } %>
 
 <% @location_deals.each do |location_deal| %>
     <%= render partial: "shared/deal_snippet",
