@@ -17,5 +17,7 @@
 
 #Ignore important keys
 /config/initializers/aws.rb
+/config/initializers/stripe.rb
+/config/secrets.yml
 
 /.idea
