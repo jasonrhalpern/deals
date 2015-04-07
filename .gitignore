@@ -15,4 +15,7 @@
 /log/*.log
 /tmp
 
+#Ignore important keys
+/config/initializers/aws.rb
+
 /.idea
