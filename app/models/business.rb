@@ -3,6 +3,7 @@ class Business < ActiveRecord::Base
   has_many :deals, inverse_of: :business
   belongs_to :category, inverse_of: :businesses
   belongs_to :user, inverse_of: :business
+  has_one :payment, inverse_of: :business
   has_attached_file :avatar,
                     #:styles => { :medium => "300x300>", :thumb => "100x100>" },
                     :storage => :s3,
