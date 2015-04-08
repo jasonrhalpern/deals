@@ -49,4 +49,11 @@ describe Business do
     expect(business.active?).to be_falsey
   end
 
+  it 'returns a list of businesses with active payments' do
+    business1 = create(:business_with_active_payment)
+    business2 = create(:business_with_inactive_payment)
+
+    expect(Business.active).to eq([business1])
+  end
+
 end

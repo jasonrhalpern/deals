@@ -16,6 +16,10 @@ class Business < ActiveRecord::Base
             attachment_content_type: { content_type: /\Aimage\/.*\Z/ },
             attachment_size: { less_than: 2.megabytes }
 
+  def self.active
+    joins(:payment).where('payments.active_until > ?', Time.now)
+  end
+
   def active?
     payment.present? && (payment.active_until > Time.now)
   end
