@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150408145253) do
+ActiveRecord::Schema.define(version: 20150408181730) do
 
   create_table "businesses", force: true do |t|
     t.string   "name"
@@ -88,8 +88,8 @@ ActiveRecord::Schema.define(version: 20150408145253) do
   add_index "locations", ["latitude", "longitude"], name: "index_locations_on_latitude_and_longitude"
 
   create_table "payments", force: true do |t|
-    t.string   "stripe_cus_id"
-    t.string   "stripe_sub_id"
+    t.string   "stripe_cus_token"
+    t.string   "stripe_sub_token"
     t.datetime "active_until"
     t.integer  "business_id"
     t.datetime "created_at"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20150408145253) do
   add_index "payments", ["business_id"], name: "index_payments_on_business_id"
 
   create_table "plans", force: true do |t|
-    t.string   "stripe_plan_id"
+    t.string   "stripe_plan_token"
     t.text     "description"
     t.integer  "trial_days"
     t.string   "interval"

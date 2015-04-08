@@ -6,12 +6,12 @@ describe Payment do
     expect(build_stubbed(:payment)).to be_valid
   end
 
-  it 'is invalid without a stripe customer id' do
-    expect(build_stubbed(:payment, stripe_cus_id: nil)).to have(1).errors_on(:stripe_cus_id)
+  it 'is invalid without a stripe customer token' do
+    expect(build_stubbed(:payment, stripe_cus_token: nil)).to have(1).errors_on(:stripe_cus_token)
   end
 
   it 'is invalid without a stripe subscription id' do
-    expect(build_stubbed(:payment, stripe_sub_id: nil)).to have(1).errors_on(:stripe_sub_id)
+    expect(build_stubbed(:payment, stripe_sub_token: nil)).to have(1).errors_on(:stripe_sub_token)
   end
 
   it 'is invalid without an active until time' do

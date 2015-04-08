@@ -7,7 +7,7 @@ describe Plan do
   end
 
   it 'is invalid without a stripe plan id' do
-    expect(build_stubbed(:plan, stripe_plan_id: nil)).to have(1).errors_on(:stripe_plan_id)
+    expect(build_stubbed(:plan, stripe_plan_token: nil)).to have(1).errors_on(:stripe_plan_token)
   end
 
   it 'is invalid without a description' do
@@ -28,7 +28,7 @@ describe Plan do
 
   it 'is invalid without a unique stripe plan id' do
     plan = create(:plan)
-    expect(build_stubbed(:plan, stripe_plan_id: plan.stripe_plan_id)).to have(1).errors_on(:stripe_plan_id)
+    expect(build_stubbed(:plan, stripe_plan_token: plan.stripe_plan_token)).to have(1).errors_on(:stripe_plan_token)
   end
 
   it 'returns an array of active plans' do
