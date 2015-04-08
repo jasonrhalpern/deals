@@ -39,6 +39,12 @@ describe "Ability" do
       assert @ability.cannot?(:crud, Deal.new)
       assert @ability.cannot?(:crud, Deal.new(:business => @business_two))
     end
+
+    it "can crud the payment info of his own business, but not the payment of others" do
+      assert @ability.can?(:crud, Payment.new(:business => @business))
+      assert @ability.cannot?(:crud, Payment.new)
+      assert @ability.cannot?(:crud, Payment.new(:business => @business_two))
+    end
   end
 
   describe "Admin" do
@@ -72,6 +78,12 @@ describe "Ability" do
       assert @ability.can?(:crud, Deal.new(:business => @business))
       assert @ability.can?(:crud, Deal.new)
       assert @ability.can?(:crud, Deal.new(:business => @business_two))
+    end
+
+    it "can crud the payment info of his own business and the payment of others" do
+      assert @ability.can?(:crud, Payment.new(:business => @business))
+      assert @ability.can?(:crud, Payment.new)
+      assert @ability.can?(:crud, Payment.new(:business => @business_two))
     end
   end
 end
