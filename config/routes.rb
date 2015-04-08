@@ -8,7 +8,7 @@ Rails.application.routes.draw do
     get 'profile', on: :member
     resources :locations
     resources :deals
-    resources :payments, :only => [:index, :new, :create, :destroy] do
+    resources :payments, :only => [:new, :create, :index, :destroy] do
       member do
         get 'edit_card'
         get 'update_card'
