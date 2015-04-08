@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :plan do
-    stripe_plan_id 'gold'
+    sequence(:stripe_plan_id) { |n| "Plan-#{n}" }
     description 'this is the gold plan'
     trial_days 30
     interval 'month'

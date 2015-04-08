@@ -6,4 +6,8 @@ FactoryGirl.define do
     business
   end
 
+  factory :inactive_payment, parent: :payment do
+    active_until 1.day.ago
+  end
+
 end

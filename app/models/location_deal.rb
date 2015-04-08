@@ -6,7 +6,9 @@ class LocationDeal < ActiveRecord::Base
   validates :location, :deal, presence: true
   validates :location_id, :uniqueness => { :scope => :deal_id }
 
-  scope :active, -> { joins(:deal).where('deals.status = ?', Deal.statuses[:active]) }
+  def self.active
+    joins(:deal).where('deals.status = ?', Deal.statuses[:active])
+  end
 
   def self.current(day_of_week)
     day = get_date_from_day(day_of_week)

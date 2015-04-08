@@ -15,4 +15,8 @@ class Business < ActiveRecord::Base
             presence: true,
             attachment_content_type: { content_type: /\Aimage\/.*\Z/ },
             attachment_size: { less_than: 2.megabytes }
+
+  def active?
+    payment.present? && (payment.active_until > Time.now)
+  end
 end

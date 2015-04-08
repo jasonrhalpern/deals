@@ -3,4 +3,6 @@ class Payment < ActiveRecord::Base
 
   validates :stripe_cus_id, :stripe_sub_id, :active_until, :business_id, presence: true
 
+  scope :active, -> { where('active_until > ?', Time.now) }
+
 end

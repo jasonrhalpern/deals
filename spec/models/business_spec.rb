@@ -39,4 +39,14 @@ describe Business do
     expect(create(:business_with_deals).deals.count).to eq(2)
   end
 
+  it 'returns true if the payment associated with this business is active' do
+    business = build(:business_with_active_payment)
+    expect(business.active?).to be_truthy
+  end
+
+  it 'returns false if the payment associated with this business is inactive' do
+    business = build(:business_with_inactive_payment)
+    expect(business.active?).to be_falsey
+  end
+
 end
