@@ -1,4 +1,8 @@
 class PaymentsController < ApplicationController
+  load_and_authorize_resource :business
+  load_and_authorize_resource :payment, :through => :business, :singleton => true
+
+  before_action :authenticate_user!
 
   def new
   end
@@ -22,6 +26,12 @@ class PaymentsController < ApplicationController
   end
 
   def destroy
+  end
+
+  private
+
+  def payment_params
+    params.require(:payment).permit(:stripe_card_token, :stripe_plan_token)
   end
 
 end
