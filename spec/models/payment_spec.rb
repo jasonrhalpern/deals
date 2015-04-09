@@ -22,6 +22,11 @@ describe Payment do
     expect(build_stubbed(:payment, business: nil)).to have(1).errors_on(:business_id)
   end
 
+  it 'is invalid without a unique business' do
+    payment = create(:payment)
+    expect(build_stubbed(:payment, business: payment.business)).to have(1).errors_on(:business_id)
+  end
+
   it 'returns an array of active payments' do
     deal1 = create(:payment, :active_until => 1.day.ago)
     deal2 = create(:payment, :active_until => 1.day.from_now)

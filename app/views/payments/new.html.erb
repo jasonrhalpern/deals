@@ -1,5 +1,5 @@
 <% content_for :page_javascript do %>
-    <%= javascript_include_tag "https://js.stripe.com/v2/", "application" %>
+    <%= javascript_include_tag "https://js.stripe.com/v2/" %>
 <% end %>
 
 <%= bootstrap_form_for [@business, @payment] do |f| %>
@@ -7,7 +7,7 @@
 
     <div>
       <%= label_tag :card_number, "Credit Card Number" %>
-      <%= text_field_tag :card_number, nil, name: nil, :size => '20', :data => {:stripe => 'number'} %>
+      <%= text_field_tag :card_number, nil, name: nil, :size => '26', :data => {:stripe => 'number'} %>
     </div>
 
     <div>
@@ -19,14 +19,14 @@
 
     <div>
       <%= label_tag :card_cvc, "Security Code on Card (CVV)" %>
-      <%= text_field_tag :card_cvc, nil, name: nil, :size => '4', :data => {:stripe => 'cvc'}%>
+      <%= text_field_tag :card_cvc, nil, name: nil, :size => '6', :data => {:stripe => 'cvc'}%>
     </div>
 
     <div>
       <%= f.select :stripe_plan_token, options_from_collection_for_select(Plan.active, :stripe_plan_token, :description), :label => 'Plan' %>
     </div>
 
-    <div id="stripe_error">
+    <div id="stripe_error"  style="color:#b94a48">
       <noscript>JavaScript is not enabled and is required for this form. Please enable it in your web browser settings.</noscript>
     </div>
 

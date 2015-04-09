@@ -19,7 +19,7 @@ describe Plan do
   end
 
   it 'is invalid without an interval' do
-    expect(build_stubbed(:plan, interval: nil)).to have(1).errors_on(:interval)
+    expect(build_stubbed(:plan, interval: nil)).to have(2).errors_on(:interval)
   end
 
   it 'is invalid without an active flag' do
@@ -29,6 +29,10 @@ describe Plan do
   it 'is invalid without a unique stripe plan id' do
     plan = create(:plan)
     expect(build_stubbed(:plan, stripe_plan_token: plan.stripe_plan_token)).to have(1).errors_on(:stripe_plan_token)
+  end
+
+  it 'is invalid if the interval is not included in the list of options' do
+    expect(build_stubbed(:plan, interval: 'day')).to have(1).errors_on(:interval)
   end
 
   it 'returns an array of active plans' do

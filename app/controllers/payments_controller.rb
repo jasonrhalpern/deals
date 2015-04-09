@@ -4,13 +4,19 @@ class PaymentsController < ApplicationController
 
   before_action :authenticate_user!
 
+  def index
+  end
+
   def new
   end
 
   def create
-  end
-
-  def show
+    if @payment.save_with_plan
+      redirect_to business_payments_path(@business), notice: 'This payment plan was successfully added.'
+    else
+      flash[:alert] = 'This payment plan could not be saved at this time. Please try again later.'
+      render action: "new"
+    end
   end
 
   def edit_card
