@@ -14,7 +14,7 @@ class PaymentsController < ApplicationController
     if @payment.save_with_plan
       redirect_to business_payments_path(@business), notice: 'This payment plan was successfully processed.'
     else
-      flash[:alert] = 'This payment plan could not be processed at this time. Please try again later or contact us.'
+      flash[:alert] = 'This payment plan could not be processed at this time. Please try again or contact us directly.'
       render action: "new"
     end
   end

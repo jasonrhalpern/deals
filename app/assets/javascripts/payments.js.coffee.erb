@@ -1,4 +1,4 @@
-jQuery ->
+ready = ->
   Stripe.setPublishableKey('<%= Rails.application.secrets.stripe_publishable_key %>')
   payment.setupForm()
 
@@ -24,3 +24,6 @@ payment =
     else
       $('#stripe_error').text(response.error.message)
       $('input[type=submit]').attr('disabled', false)
+
+$(document).ready(ready)
+$(document).on('page:load', ready)
