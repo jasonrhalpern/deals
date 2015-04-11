@@ -4,6 +4,10 @@ class Payment < ActiveRecord::Base
   validates :business_id, uniqueness: true
   attr_accessor :stripe_card_token, :stripe_plan_token
 
+  PAYMENT_EXCEPTIONS = [ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved, Stripe::CardError,
+                        Stripe::InvalidRequestError, Stripe::AuthenticationError, Stripe::APIConnectionError,
+                        Stripe::APIError, Stripe::StripeError].freeze
+
   scope :active, -> { where('active_until > ?', Time.now) }
 
   def save_with_plan
@@ -13,14 +17,13 @@ class Payment < ActiveRecord::Base
         :email => business.user.email,
         :source  => stripe_card_token,
         :plan => stripe_plan_token,
-        :description => 'Business customer'
+        :description => 'Registered Business'
     )
     self.stripe_cus_token = customer.id
     self.stripe_sub_token = customer.subscriptions.first.id
-    save! if valid?
-   rescue Stripe::InvalidRequestError => e
+    save!
+  rescue *PAYMENT_EXCEPTIONS => e
     logger.error "Stripe error while creating customer: #{e.message}"
-    errors.add :base, "There was a problem with your credit card."
     false
   end
 

@@ -11,4 +11,5 @@ Category.where(name: "Bars").first_or_create
 
 Plan.where(stripe_plan_token: "intro_monthly", description: "$3.95/month", trial_days: 30, interval: "monthly", active: true).first_or_create
 Plan.where(stripe_plan_token: "intro_yearly", description: "$24.95/month", trial_days: 30, interval: "year", active: true).first_or_create
+Plan.where(stripe_plan_token: "intro_no_trial", description: "$2.95/month", trial_days: 0, interval: "month", active: true).first_or_create
 
