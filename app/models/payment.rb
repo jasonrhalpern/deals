@@ -30,12 +30,16 @@ class Payment < ActiveRecord::Base
   def get_card
     customer = Stripe::Customer.retrieve(stripe_cus_token)
     customer.sources.retrieve(customer.default_source)
+  rescue *PAYMENT_EXCEPTIONS => e
+    logger.error "Stripe error while retrieving customer: #{e.message}"
   end
 
   def get_plan
     customer = Stripe::Customer.retrieve(stripe_cus_token)
     subscription = customer.subscriptions.retrieve(stripe_sub_token)
     Plan.where(stripe_plan_token: subscription.plan.id).first
+  rescue *PAYMENT_EXCEPTIONS => e
+    logger.error "Stripe error while retrieving customer: #{e.message}"
   end
 
 end
