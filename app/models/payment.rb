@@ -27,4 +27,15 @@ class Payment < ActiveRecord::Base
     false
   end
 
+  def get_card
+    customer = Stripe::Customer.retrieve(stripe_cus_token)
+    customer.sources.retrieve(customer.default_source)
+  end
+
+  def get_plan
+    customer = Stripe::Customer.retrieve(stripe_cus_token)
+    subscription = customer.subscriptions.retrieve(stripe_sub_token)
+    Plan.where(stripe_plan_token: subscription.plan.id).first
+  end
+
 end
