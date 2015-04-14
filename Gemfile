@@ -44,6 +44,8 @@ group :development, :test do
   gem 'rspec-collection_matchers'
   gem 'database_cleaner'
   gem 'launchy'
+  gem 'stripe-ruby-mock'
+  gem 'thin'
 end
 
 # Use ActiveModel has_secure_password

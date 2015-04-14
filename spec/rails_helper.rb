@@ -7,6 +7,8 @@ require 'rspec/rails'
 require 'capybara/rspec'
 require 'capybara/rails'
 require 'rspec/collection_matchers'
+require 'stripe_mock'
+require 'thin'
 
 # Requires supporting ruby files with custom matchers and macros, etc,
 # in spec/support/ and its subdirectories.

@@ -42,10 +42,6 @@ class Payment < ActiveRecord::Base
     logger.error "Stripe error while retrieving customer: #{e.message}"
   end
 
-  def update_card
-
-  end
-
   def update_plan(plan_token)
     customer = retrieve_customer
     subscription = customer.subscriptions.retrieve(stripe_sub_token)
