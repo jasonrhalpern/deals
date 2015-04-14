@@ -1,0 +1,38 @@
+<% content_for :page_javascript do %>
+    <%= javascript_include_tag "https://js.stripe.com/v2/" %>
+<% end %>
+
+<%= bootstrap_form_for [@business, @payment], :url => form_url, :html => {:id => "new_payment"} do |f| %>
+    <%= f.hidden_field :stripe_card_token %>
+
+    <div>
+      <%= label_tag :card_number, "Credit Card Number" %>
+      <%= text_field_tag :card_number, nil, name: nil, :size => '26', :data => {:stripe => 'number'} %>
+    </div>
+
+    <div>
+      <%= label_tag :card_month, "Card Expiration" %>
+      <%= select_month nil, {add_month_numbers: true}, {name: nil, id: "card_month", :data => {:stripe => 'exp-month'}} %>
+      <%= select_year nil, {start_year: Date.today.year, end_year: Date.today.year + 15}, {name: nil, id: "card_year", :data => {:stripe => 'exp-year'}} %>
+    </div>
+    </div>
+
+    <div>
+      <%= label_tag :card_cvc, "Security Code on Card (CVV)" %>
+      <%= text_field_tag :card_cvc, nil, name: nil, :size => '6', :data => {:stripe => 'cvc'}%>
+    </div>
+
+    <% if defined?(plans) %>
+        <div>
+          <%= f.select :stripe_plan_token, options_from_collection_for_select(plans, :stripe_plan_token, :description), :label => 'Plan' %>
+        </div>
+    <% end %>
+
+    <div id="stripe_error"  style="color:#b94a48">
+      <noscript>JavaScript is not enabled and is required for this form. First enable it in your web browser settings.</noscript>
+    </div>
+
+    <div>
+      <input type="submit" value="Submit" />
+    </div>
+<% end %>

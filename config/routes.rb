@@ -11,9 +11,9 @@ Rails.application.routes.draw do
     resources :payments, :only => [:index, :new, :create, :destroy] do
       member do
         get 'edit_card'
-        get 'update_card'
+        patch 'update_card'
         get 'edit_plan'
-        get 'update_plan'
+        patch 'update_plan'
       end
     end
   end

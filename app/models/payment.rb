@@ -28,18 +28,46 @@ class Payment < ActiveRecord::Base
   end
 
   def get_card
-    customer = Stripe::Customer.retrieve(stripe_cus_token)
+    customer = retrieve_customer
     customer.sources.retrieve(customer.default_source)
   rescue *PAYMENT_EXCEPTIONS => e
     logger.error "Stripe error while retrieving customer: #{e.message}"
   end
 
   def get_plan
-    customer = Stripe::Customer.retrieve(stripe_cus_token)
+    customer = retrieve_customer
     subscription = customer.subscriptions.retrieve(stripe_sub_token)
     Plan.where(stripe_plan_token: subscription.plan.id).first
   rescue *PAYMENT_EXCEPTIONS => e
     logger.error "Stripe error while retrieving customer: #{e.message}"
+  end
+
+  def update_card
+
+  end
+
+  def update_plan(plan_token)
+    customer = retrieve_customer
+    subscription = customer.subscriptions.retrieve(stripe_sub_token)
+    subscription.plan = plan_token
+    subscription.save
+  rescue *PAYMENT_EXCEPTIONS => e
+    logger.error "Stripe error while updating plan for customer: #{e.message}"
+    false
+  end
+
+  def update_card(card_token)
+    customer = retrieve_customer
+    customer.sources.retrieve(customer.default_source).delete
+    customer.source = card_token
+    customer.save
+  rescue *PAYMENT_EXCEPTIONS => e
+    logger.error "Stripe error while updating card for customer: #{e.message}"
+    false
+  end
+
+  def retrieve_customer
+    Stripe::Customer.retrieve(stripe_cus_token)
   end
 
 end

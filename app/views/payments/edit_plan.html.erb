@@ -1,0 +1,14 @@
+<h1>Change Plan</h1>
+
+<%= render partial: "plan", locals: { :plan => @plan_details } %>
+
+<h4>Pick a New Plan</h4>
+<%= bootstrap_form_for [@business, @payment], :url => update_plan_business_payment_path do |f| %>
+    <div>
+      <%= f.select :stripe_plan_token, options_from_collection_for_select(Plan.no_free_trial.active, :stripe_plan_token, :description), :label => 'Plan' %>
+    </div>
+
+    <div>
+      <input type="submit" value="Update" />
+    </div>
+<% end %>

@@ -1,12 +1,7 @@
 <h1>Payment</h1>
 
-<h4>Plan Details</h4>
-<p>Description: <%= @plan_details.description %></p>
-<p>Payment Interval: <%= @plan_details.interval %> </p>
+<%= render partial: "plan", locals: { :plan => @plan_details } %>
 <%= link_to 'Change Plan', edit_plan_business_payment_path(@business, @payment) %>
 
-<h4>Card Details</h4>
-<p>Brand: <%= @card_details.brand %></p>
-<p>Last 4 Digits: <%= @card_details.last4 %></p>
-<p>Expiration: <%= "#{@card_details.exp_month}/#{@card_details.exp_year}" %></p>
-<%= link_to 'Change Card', edit_card_business_payment_path(@business, @payment) %>
+<%= render partial: "card", locals: { :card => @card_details } %>
+<%= link_to 'Update Card', edit_card_business_payment_path(@business, @payment) %>
