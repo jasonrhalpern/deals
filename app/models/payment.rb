@@ -12,7 +12,7 @@ class Payment < ActiveRecord::Base
 
   def save_with_plan
     return false unless tokens_present?
-    set_active_until(stripe_plan_token)
+    set_active_until
     customer = Stripe::Customer.create(
         :email => business.user.email,
         :source  => stripe_card_token,
@@ -70,8 +70,8 @@ class Payment < ActiveRecord::Base
     stripe_card_token.present? && stripe_plan_token.present?
   end
 
-  def set_active_until(plan_token)
-    plan = Plan.where(stripe_plan_token: plan_token).first
+  def set_active_until
+    plan = Plan.where(stripe_plan_token: stripe_plan_token).first
     self.active_until = "#{plan.trial_days}".to_i.days.from_now
   end
 

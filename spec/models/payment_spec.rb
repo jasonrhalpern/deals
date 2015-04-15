@@ -30,6 +30,14 @@ describe Payment do
     expect(build_stubbed(:payment, business: payment.business)).to have(1).errors_on(:business_id)
   end
 
+  it 'sets the active until attribute based on the plan' do
+    plan = create(:plan)
+    payment = create(:payment, :stripe_plan_token => plan.stripe_plan_token)
+    payment.set_active_until
+    active_until = "#{plan.trial_days}".to_i.days.from_now.to_date
+    expect(payment.active_until.to_date).to eq(active_until)
+  end
+
   context 'Stripe' do
     before(:each) do
       @plan = stripe_helper.create_plan(:id => 'intro_plan', :interval => 'month', :amount => '395', :currency => 'usd',
