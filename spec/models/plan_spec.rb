@@ -49,4 +49,11 @@ describe Plan do
     expect(Plan.no_free_trial).to eq([deal1, deal3])
   end
 
+  it 'returns an array of plans with a free trial' do
+    deal1 = create(:plan, :trial_days => 0)
+    deal2 = create(:plan)
+    deal3 = create(:plan)
+    expect(Plan.free_trial).to eq([deal2, deal3])
+  end
+
 end

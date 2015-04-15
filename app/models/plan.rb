@@ -6,6 +6,7 @@ class Plan < ActiveRecord::Base
   validates :interval, :inclusion => ['month', 'year']
 
   scope :no_free_trial, -> { where(trial_days: 0) }
+  scope :free_trial, -> { where('trial_days > 0') }
   scope :active, -> { where(active: true) }
 
 end
