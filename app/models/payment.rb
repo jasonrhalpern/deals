@@ -11,6 +11,7 @@ class Payment < ActiveRecord::Base
   scope :active, -> { where('active_until > ?', Time.now) }
 
   def save_with_plan
+    return false unless tokens_present?
     plan = Plan.where(stripe_plan_token: stripe_plan_token).first
     self.active_until = "#{plan.trial_days}".to_i.days.from_now
     customer = Stripe::Customer.create(
@@ -64,6 +65,10 @@ class Payment < ActiveRecord::Base
 
   def retrieve_customer
     Stripe::Customer.retrieve(stripe_cus_token)
+  end
+
+  def tokens_present?
+    stripe_card_token.present? && stripe_plan_token.present?
   end
 
 end

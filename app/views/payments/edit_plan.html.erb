@@ -1,6 +1,6 @@
 <h1>Change Plan</h1>
 
-<%= render partial: "plan", locals: { :plan => @plan_details } %>
+<%= render partial: "plan", locals: { :plan => @plan } %>
 
 <h4>Pick a New Plan</h4>
 <%= bootstrap_form_for [@business, @payment], :url => update_plan_business_payment_path do |f| %>

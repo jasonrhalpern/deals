@@ -9,8 +9,8 @@ class PaymentsController < ApplicationController
     if @payment.nil?
       redirect_to action: :new if @payment.nil?
     else
-      @card_details = @payment.get_card
-      @plan_details = @payment.get_plan
+      @card = @payment.get_card
+      @plan = @payment.get_plan
     end
   end
 
@@ -28,7 +28,7 @@ class PaymentsController < ApplicationController
 
   def edit_card
     authorize! :edit_card, @payment
-    @card_details = @payment.get_card
+    @card = @payment.get_card
   end
 
   def update_card
@@ -43,7 +43,7 @@ class PaymentsController < ApplicationController
 
   def edit_plan
     authorize! :edit_plan, @payment
-    @plan_details = @payment.get_plan
+    @plan = @payment.get_plan
   end
 
   def update_plan

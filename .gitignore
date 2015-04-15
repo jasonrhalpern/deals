@@ -21,3 +21,6 @@
 /config/secrets.yml
 
 /.idea
+
+stripe-mock-server.log
+

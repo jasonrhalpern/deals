@@ -38,14 +38,14 @@ describe Payment do
              :interval => @plan.interval, :active => true)
     end
 
-    it 'creates the customer' do
+    it 'creates the Stripe customer and the payment plan' do
       payment = create(:payment, :stripe_plan_token => @plan.id, :stripe_card_token => stripe_helper.generate_card_token)
       expect(payment.save_with_plan).to be_truthy
     end
 
     # it 'returns the customer card details' do
     #   card_token = stripe_helper.generate_card_token(brand: 'Visa', last4: '9191', exp_month: 1, exp_year: 2018)
-    #   customer = Stripe::Customer.create({email: 'h@aol.com', plan: @plan.id, source: card_token}, {api_key: 'sk_test_1'})
+    #   customer = Stripe::Customer.create(email: 'h@aol.com', plan: @plan.id, source: card_token)
     #   payment = create(:payment, :stripe_cus_token => customer.id)
     #   card = payment.get_card
     #   expect(card.brand).to eq('Visa')
@@ -54,7 +54,6 @@ describe Payment do
     #   expect(card.exp_month).to eq(1)
     # end
   end
-
 
   it 'returns an array of active payments' do
     deal1 = create(:payment, :active_until => 1.day.ago)

@@ -34,7 +34,7 @@ gem 'kaminari'
 
 gem 'chronic'
 
-gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+gem 'stripe'
 
 group :development, :test do
   gem 'rspec-rails'
