@@ -15,6 +15,9 @@ class PaymentsController < ApplicationController
   end
 
   def new
+    if Payment.exists?(:business_id => @business.id)
+      redirect_to action: :index
+    end
   end
 
   def create

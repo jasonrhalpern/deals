@@ -1,7 +1,7 @@
 <h4>Plan Details</h4>
 <% if plan.present? %>
     <p>Description: <%= plan.description %></p>
-    <p>Payment Interval: <%= plan.interval %> </p>
+    <p>Payment Interval: <%= "Once a #{plan.interval}" %> </p>
 <% else %>
     <p>We could not retrieve your plan details at this time.</p>
 <% end %>
