@@ -9,6 +9,13 @@ describe PaymentsController do
   before { StripeMock.start }
   after { StripeMock.stop }
 
+  describe "GET #index" do
+    it "renders the :index template" do
+      get :index, :business_id => johns_payment.business_id
+      expect(response).to render_template("index")
+    end
+  end
+
   describe "GET #new" do
     it "assigns a new payment to @payment" do
       get :new, :business_id => johns_biz.id
@@ -63,12 +70,12 @@ describe PaymentsController do
 
   describe "GET #edit_card" do
     it "assigns the requested payment to @payment" do
-      get :edit_card, :business_id => johns_payment.business_id, :id => johns_payment
+      get :edit_card, :business_id => johns_biz, :id => johns_payment
       expect(assigns(:payment)).to eq(johns_payment)
     end
 
     it "renders the :edit_card template" do
-      get :edit_card, :business_id => johns_payment.business_id, :id => johns_payment
+      get :edit_card, :business_id => johns_biz, :id => johns_payment
       expect(response).to render_template("edit_card")
     end
   end
@@ -86,12 +93,12 @@ describe PaymentsController do
     # end
 
     it "assigns the requested payment to @payment" do
-      get :edit_plan, :business_id => johns_payment.business_id, :id => johns_payment
+      get :edit_plan, :business_id => johns_biz, :id => johns_payment
       expect(assigns(:payment)).to eq(johns_payment)
     end
 
     it "renders the :edit_plan template" do
-      get :edit_plan, :business_id => johns_payment.business_id, :id => johns_payment
+      get :edit_plan, :business_id => johns_biz, :id => johns_payment
       expect(response).to render_template("edit_plan")
     end
   end
