@@ -60,6 +60,8 @@ class PaymentsController < ApplicationController
   end
 
   def destroy
+    @payment.cancel
+    redirect_to business_payments_path(@business)
   end
 
   private

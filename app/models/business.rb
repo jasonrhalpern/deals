@@ -21,6 +21,20 @@ class Business < ActiveRecord::Base
   end
 
   def active?
-    payment.present? && (payment.active_until > Time.now)
+    payment.present? && payment.stripe_sub_token.present? && (payment.active_until > Time.now)
   end
+
+  def pending?
+    payment.nil?
+  end
+
+  def canceled?
+    payment.present? && payment.stripe_sub_token.blank?
+  end
+
+  def deactivated?
+    payment.present? && payment.stripe_sub_token.present? && (payment.active_until < Time.now)
+  end
+
+
 end

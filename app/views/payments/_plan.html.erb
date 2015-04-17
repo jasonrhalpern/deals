@@ -1,7 +1,9 @@
-<h4>Plan Details</h4>
+<h4>Plan</h4>
 <% if plan.present? %>
     <p>Description: <%= plan.description %></p>
     <p>Payment Interval: <%= "Once a #{plan.interval}" %> </p>
+<% elsif @business.present? && @business.canceled? %>
+    <p>You can reactivate your account by adding a plan.</p>
 <% else %>
     <p>We could not retrieve your plan details at this time.</p>
 <% end %>

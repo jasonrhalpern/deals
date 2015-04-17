@@ -39,14 +39,54 @@ describe Business do
     expect(create(:business_with_deals).deals.count).to eq(2)
   end
 
-  it 'returns true if the payment associated with this business is active' do
-    business = build(:business_with_active_payment)
-    expect(business.active?).to be_truthy
+  describe 'active?' do
+    it 'returns true if the business is active' do
+      business = build(:business_with_active_payment)
+      expect(business.active?).to be_truthy
+    end
+
+    it 'returns false if the business is not active' do
+      business = build(:business_with_inactive_payment)
+      expect(business.active?).to be_falsey
+    end
   end
 
-  it 'returns false if the payment associated with this business is inactive' do
-    business = build(:business_with_inactive_payment)
-    expect(business.active?).to be_falsey
+  describe 'pending?' do
+    it 'returns true if the business is pending' do
+      business = build(:business)
+      expect(business.pending?).to be_truthy
+    end
+
+    it 'returns false if the business is not pending' do
+      business = build(:business_with_active_payment)
+      expect(business.pending?).to be_falsey
+    end
+  end
+
+  describe 'canceled?' do
+    it 'returns true if the business is canceled' do
+      payment = build(:payment, :stripe_sub_token => nil)
+      business = build(:business, :payment => payment)
+      expect(business.canceled?).to be_truthy
+    end
+
+    it 'returns false if the business is not canceled' do
+      payment = build(:payment)
+      business = build(:business, :payment => payment)
+      expect(business.canceled?).to be_falsey
+    end
+  end
+
+  describe 'deactivated?' do
+    it 'returns true if the business is deactivated' do
+      business = build(:business_with_inactive_payment)
+      expect(business.deactivated?).to be_truthy
+    end
+
+    it 'returns false if the business is active' do
+      business = build(:business_with_active_payment)
+      expect(business.deactivated?).to be_falsey
+    end
   end
 
   it 'returns a list of businesses with active payments' do

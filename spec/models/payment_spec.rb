@@ -13,8 +13,14 @@ describe Payment do
     expect(build_stubbed(:payment, stripe_cus_token: nil)).to have(1).errors_on(:stripe_cus_token)
   end
 
-  it 'is invalid without a stripe subscription id' do
-    expect(build_stubbed(:payment, stripe_sub_token: nil)).to have(1).errors_on(:stripe_sub_token)
+  it 'is invalid without a stripe subscription id if the card and plan tokens are present' do
+    expect(build_stubbed(:payment, :stripe_plan_token => 'plan_1', :stripe_card_token => 'card_1',
+                         stripe_sub_token: nil)).to have(1).errors_on(:stripe_sub_token)
+  end
+
+  it 'is valid without a stripe subscription id if either the card or plan tokens are not present' do
+    expect(build_stubbed(:payment, :stripe_plan_token => 'plan_1', :stripe_card_token => nil,
+                         stripe_sub_token: nil)).to be_valid
   end
 
   it 'is invalid without an active until time' do
@@ -34,8 +40,8 @@ describe Payment do
     plan = create(:plan)
     payment = create(:payment, :stripe_plan_token => plan.stripe_plan_token)
     payment.set_active_until
-    active_until = "#{plan.trial_days}".to_i.days.from_now.to_date
-    expect(payment.active_until.to_date).to eq(active_until)
+    active_until = "#{plan.trial_days}".to_i.days.from_now + 6.hours
+    expect(payment.active_until.to_date).to eq(active_until.to_date)
   end
 
   context 'Stripe' do

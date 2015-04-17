@@ -1,7 +1,23 @@
 <h1>Payment</h1>
 
-<%= render partial: "plan", locals: { :plan => @plan } %>
+<% if @business.canceled? %>
+    <div class="alert alert-danger" role="alert">
+      This account has been canceled. Add a plan to reactive your account.
+    </div>
+<% elsif @business.deactivated? %>
+    <div class="alert alert-danger" role="alert">
+      This account has been deactivated. Please update your credit card details to reactive your account.
+    </div>
+<% end %>
+
+<%= render partial: "plan", locals: { :plan => @plan, :business => @business } %>
 <%= link_to 'Change Plan', edit_plan_business_payment_path(@business, @payment) %>
 
 <%= render partial: "card", locals: { :card => @card } %>
 <%= link_to 'Update Card', edit_card_business_payment_path(@business, @payment) %>
+
+<%= link_to 'Cancel Account', business_payment_path(@business, @payment), method: :delete,
+            data: { confirm: 'Are you sure you want to cancel your account?' } %>
+
+
+
