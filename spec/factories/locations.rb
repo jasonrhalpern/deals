@@ -1,9 +1,9 @@
 FactoryGirl.define do
   factory :location do
-    street "4 Maple Drive"
+    street "8 Pond Drive"
     city "Syosset"
     state "NY"
-    zip_code "11732"
+    zip_code "11791"
     phone_number "123-144-4234"
     business
   end

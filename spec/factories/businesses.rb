@@ -24,7 +24,7 @@ FactoryGirl.define do
     end
 
     after(:create) do |business, evaluator|
-      create_list(:deal, evaluator.deals_count, business: business)
+      create_list(:deal_with_locations, evaluator.deals_count, business: business)
     end
   end
 

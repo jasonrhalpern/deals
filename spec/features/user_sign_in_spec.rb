@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Signing in' do
+feature 'Signing In' do
   let(:john) { create_user }
 
   scenario 'Signing in with the correct credentials' do
