@@ -33,7 +33,7 @@ class Business < ActiveRecord::Base
   end
 
   def deactivated?
-    payment.present? && payment.stripe_sub_token.present? && (payment.active_until < Time.now)
+    payment.present? && payment.deactivated?
   end
 
 

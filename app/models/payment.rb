@@ -53,7 +53,7 @@ class Payment < ActiveRecord::Base
     else
       subscription = customer.subscriptions.create(:plan => plan_token)
       self.stripe_sub_token = subscription.id
-      self.active_until = Time.now + 2.hours
+      self.active_until = Time.now + self.class.update_buffer_time
       save!
     end
   rescue *PAYMENT_EXCEPTIONS => e
@@ -66,6 +66,11 @@ class Payment < ActiveRecord::Base
     customer.sources.retrieve(customer.default_source).delete
     customer.source = card_token
     customer.save
+    if deactivated?
+      self.active_until = Time.now + self.class.update_buffer_time
+      save
+    end
+    true
   rescue *PAYMENT_EXCEPTIONS => e
     logger.error "Stripe error while updating card for customer: #{e.message}"
     false
@@ -79,6 +84,10 @@ class Payment < ActiveRecord::Base
     save!
   rescue *PAYMENT_EXCEPTIONS => e
     logger.error "Stripe error while canceling subscription: #{e.message}"
+  end
+
+  def deactivated?
+    stripe_sub_token.present? && (active_until < Time.now)
   end
 
   def deactivate
@@ -99,6 +108,10 @@ class Payment < ActiveRecord::Base
   def set_active_until
     plan = Plan.where(stripe_plan_token: stripe_plan_token).first
     self.active_until = "#{plan.trial_days}".to_i.days.from_now + 6.hours
+  end
+
+  def self.update_buffer_time
+    2.hours
   end
 
 end
