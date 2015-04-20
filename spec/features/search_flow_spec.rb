@@ -5,7 +5,7 @@ feature 'Search Flow' do
 
   before(:each) do
     @category = create(:category)
-    @business = create(:business, :category => @category)
+    @business = create(:business_with_active_payment, :category => @category)
     @deal_one = create(:deal, :description => 'this deal rocks', :end_date => 1.week.from_now.to_date, :business => @business)
     @location_one = create(:location, :city => 'Woodbury', :zip_code => '11797', :business => @business)
     @location_deal_one = create(:location_deal, :location => @location_one, :deal => @deal_one)

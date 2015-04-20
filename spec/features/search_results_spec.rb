@@ -4,14 +4,18 @@ feature 'Search Results' do
   before(:each) do
     @category = create(:category)
     @category_two = create(:category)
-    @business = create(:business, :category => @category)
+    @business = create(:business_with_active_payment, :category => @category)
     @deal = create(:deal, :end_date => 1.week.from_now.to_date, :business => @business)
     @location = create(:location, :business => @business)
     @location_deal = create(:location_deal, :location => @location, :deal => @deal)
-    @business_two = create(:business, :category => @category)
+    @business_two = create(:business_with_active_payment, :category => @category)
     @deal_two = create(:deal, :end_date => 1.week.from_now.to_date, :business => @business_two)
     @location_two = create(:location, :business => @business_two)
     @location_deal_two = create(:location_deal, :location => @location_two, :deal => @deal_two)
+    @business_three = create(:business_with_inactive_payment, :category => @category)
+    @deal_three = create(:deal, :end_date => 1.week.from_now.to_date, :business => @business_three)
+    @location_three = create(:location, :business => @business_three)
+    @location_deal_three = create(:location_deal, :location => @location_three, :deal => @deal_three)
   end
 
   scenario 'Searching for a deal that meets the search criteria' do
@@ -54,6 +58,7 @@ feature 'Search Results' do
     click_button 'Search'
     expect(page).to have_content @business.name
     expect(page).to have_content @business_two.name
+    expect(page).not_to have_content @business_three.name
   end
 
   scenario 'Searching for a day of the week that does not have any deals' do
@@ -85,6 +90,7 @@ feature 'Search Results' do
     click_button 'Search'
     expect(page).to have_content @business.name
     expect(page).not_to have_content @business_two.name
+    expect(page).not_to have_content @business_three.name
   end
 
 

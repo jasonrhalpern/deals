@@ -76,4 +76,28 @@ describe Payment do
     expect(Payment.active).to eq([deal2, deal3])
   end
 
+  describe 'active?' do
+    it 'returns true if the payment is active' do
+      payment = build(:payment)
+      expect(payment.active?).to be_truthy
+    end
+
+    it 'returns false if the payment is not active' do
+      payment = build(:inactive_payment)
+      expect(payment.active?).to be_falsey
+    end
+  end
+
+  describe 'deactivated?' do
+    it 'returns true if the payment is deactivated' do
+      payment = build(:inactive_payment)
+      expect(payment.deactivated?).to be_truthy
+    end
+
+    it 'returns false if the payment is active' do
+      payment = build(:payment)
+      expect(payment.deactivated?).to be_falsey
+    end
+  end
+
 end

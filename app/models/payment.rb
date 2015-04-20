@@ -86,10 +86,6 @@ class Payment < ActiveRecord::Base
     logger.error "Stripe error while canceling subscription: #{e.message}"
   end
 
-  def deactivated?
-    stripe_sub_token.present? && (active_until < Time.now)
-  end
-
   def deactivate
     self.active_until = Time.now
     save!
@@ -103,6 +99,14 @@ class Payment < ActiveRecord::Base
 
   def tokens_present?
     stripe_card_token.present? && stripe_plan_token.present?
+  end
+
+  def deactivated?
+    stripe_sub_token.present? && (active_until < Time.now)
+  end
+
+  def active?
+    stripe_sub_token.present? && (active_until > Time.now)
   end
 
   def set_active_until

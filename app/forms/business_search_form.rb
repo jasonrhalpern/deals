@@ -32,7 +32,9 @@ class BusinessSearchForm
 
 
   def find_nearby_deals
-    location_deals = Location.near(location, distance, :select => "location_deals.*").joins(:location_deals)
+    location_deals = Location.near(location, distance, :select => "businesses.*, location_deals.*")
+                         .joins(:business, :location_deals)
+                         .merge(Business.active)
     location_deals.map{ |location_deal| location_deal.id }
   end
 

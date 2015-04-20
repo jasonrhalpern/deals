@@ -17,11 +17,11 @@ class Business < ActiveRecord::Base
             attachment_size: { less_than: 2.megabytes }
 
   def self.active
-    joins(:payment).where('payments.active_until > ?', Time.now)
+    joins(:payment).merge(Payment.active)
   end
 
   def active?
-    payment.present? && payment.stripe_sub_token.present? && (payment.active_until > Time.now)
+    payment.present? && payment.active?
   end
 
   def pending?
