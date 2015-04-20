@@ -3,7 +3,7 @@ class FavoritesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    @favorites = Favorite.includes(:location => :business).where(user_id: current_user.id)
+    @favorites = Favorite.includes(:location => :business).where(user_id: current_user.id).page(params[:page]).per(20)
   end
 
   def create

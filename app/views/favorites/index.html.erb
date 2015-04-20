@@ -4,4 +4,6 @@
     <h4>You do not currently have any favorites</h4>
 <% else %>
     <%= render @favorites %>
+
+    <%= paginate @favorites %>
 <% end %>

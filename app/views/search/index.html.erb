@@ -9,6 +9,7 @@
         <%= render partial: location_deal, locals: locals %>
         <% business_id = location_deal.location.business.id %>
     <% end %>
+    <%= paginate @location_deals %>
 <% end %>
 
 
