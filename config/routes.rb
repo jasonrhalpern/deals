@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   resources :favorites, :only => [:index, :create, :destroy]
 
-  get '/search', to: 'search#index'
+  get 'search', to: 'search#index'
+
+  post 'webhooks', to: 'webhooks#receive'
 
 end
