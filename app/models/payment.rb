@@ -114,6 +114,10 @@ class Payment < ActiveRecord::Base
     self.active_until = "#{plan.trial_days}".to_i.days.from_now + 6.hours
   end
 
+  def extend_active_until(interval)
+      self.active_until = (interval == 'year') ? 1.year.from_now : 1.month.from_now
+  end
+
   def self.update_buffer_time
     2.hours
   end

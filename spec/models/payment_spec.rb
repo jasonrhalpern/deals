@@ -69,6 +69,20 @@ describe Payment do
     # end
   end
 
+  it 'extends the active until date' do
+    monthly_plan = create(:plan, :interval => 'month')
+    yearly_plan = create(:plan, :interval => 'year')
+    payment = create(:payment, :active_until => Time.now)
+
+    payment.extend_active_until(monthly_plan.interval)
+    active_until = 1.month.from_now
+    expect(payment.active_until.to_date).to eq(active_until.to_date)
+
+    payment.extend_active_until(yearly_plan.interval)
+    active_until = 1.year.from_now
+    expect(payment.active_until.to_date).to eq(active_until.to_date)
+  end
+
   it 'returns an array of active payments' do
     deal1 = create(:payment, :active_until => 1.day.ago)
     deal2 = create(:payment, :active_until => 1.day.from_now)
