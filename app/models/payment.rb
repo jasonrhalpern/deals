@@ -2,7 +2,7 @@ class Payment < ActiveRecord::Base
   belongs_to :business, inverse_of: :payment
   validates :stripe_cus_token, :active_until, :business_id, presence: true
   validates :stripe_sub_token, presence: true, if: :tokens_present?
-  validates :business_id, uniqueness: true
+  validates :business_id, :stripe_cus_token, :stripe_sub_token, uniqueness: true
   attr_accessor :stripe_card_token, :stripe_plan_token
 
   PAYMENT_EXCEPTIONS = [ActiveRecord::RecordInvalid, ActiveRecord::RecordNotSaved, Stripe::CardError,
@@ -90,7 +90,7 @@ class Payment < ActiveRecord::Base
     self.active_until = Time.now
     save!
   rescue *PAYMENT_EXCEPTIONS => e
-    logger.error "Stripe error while deactivating account: #{e.message}"
+    logger.error "Error while deactivating account: #{e.message}"
   end
 
   def retrieve_customer
@@ -116,6 +116,9 @@ class Payment < ActiveRecord::Base
 
   def extend_active_until(interval)
       self.active_until = (interval == 'year') ? 1.year.from_now : 1.month.from_now
+      save!
+  rescue *PAYMENT_EXCEPTIONS => e
+    logger.error "Error while extending active until: #{e.message}"
   end
 
   def self.update_buffer_time

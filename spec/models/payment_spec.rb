@@ -36,6 +36,16 @@ describe Payment do
     expect(build_stubbed(:payment, business: payment.business)).to have(1).errors_on(:business_id)
   end
 
+  it 'is invalid without a unique stripe customer id' do
+    payment = create(:payment)
+    expect(build_stubbed(:payment, stripe_cus_token: payment.stripe_cus_token)).to have(1).errors_on(:stripe_cus_token)
+  end
+
+  it 'is invalid without a unique stripe subscription id' do
+    payment = create(:payment)
+    expect(build_stubbed(:payment, stripe_sub_token: payment.stripe_sub_token)).to have(1).errors_on(:stripe_sub_token)
+  end
+
   it 'sets the active until attribute based on the plan' do
     plan = create(:plan)
     payment = create(:payment, :stripe_plan_token => plan.stripe_plan_token)
