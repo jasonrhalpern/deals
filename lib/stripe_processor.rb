@@ -4,13 +4,13 @@ module StripeProcessor
     payment = load_payment(invoice.customer, invoice.subscription)
     subscription = invoice.lines.data.detect { |line| line['id'] == invoice.subscription }
     payment.extend_active_until(subscription.plan.interval) if subscription.present?
-    #emmail user
+    #email user
   end
 
   def process_invoice_failure(invoice)
     payment = load_payment(invoice.customer, invoice.subscription)
     payment.deactivate
-    #emmail user
+    #email user
   end
 
   def load_payment(customer_token, subscription_token)
